@@ -17,8 +17,8 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
 
     // FIXME : 
     // LoadSceneでシーンをロードしたときにキャッシュしておき、
-    // LoadPrevSceneで戻るときにキャッシュしておいたシーンをアクティブにするような流れのほうが処理負荷を抑えられるため理想ではある。
-    // が、ひとまずキャッシュは行わずに毎回ロードする流れで対応。
+    // LoadPrevSceneで前のシーンに戻るときにキャッシュしておいたシーンをアクティブにするような流れのほうが処理負荷を抑えられるため理想ではある。
+    // が、ひとまずキャッシュは行わずに毎回ロードとアンロードを繰り返す流れで対応。
     // 今後、シーンのロードが重たくなってきたら考える。
 
     /// <summary>
@@ -92,21 +92,23 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
     /// <param name="onComplete">ロード完了時のコールバック</param>
     private IEnumerator LoadSceneCoroutine(string sceneName, Action<SceneComponent> onComplete)
     {
-        // シーンロード
-        AsyncOperation loadTask = UnitySceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        // フェードアウト開始（フェード終了時にシーンロード開始）
+        AsyncOperation loadTask = null;
+        FadePlayer.m_Instance.Play(0, 1, 1, null, () => 
+        {
+            // シーンロード
+            loadTask = UnitySceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        });
 
         // ロード完了まで待機
-        while (!loadTask.isDone) 
-        {
-            yield return null;
-        }
+        while (loadTask == null || !loadTask.isDone) { yield return null; };
 
         // ロード完了
 
         // シーンのルートオブジェクトを取得
         Scene activeScene = UnitySceneManager.GetActiveScene();
         GameObject[] rootObjects = activeScene.GetRootGameObjects();
-        
+
         // ルートオブジェクトからSceneComponentを探して、ロード完了を通知
         foreach (var root in rootObjects)
         {
@@ -117,6 +119,14 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
                 // 通知
                 m_sceneHistory.Push(sceneName);
                 onComplete?.Invoke(component);
+
+                // フェードイン開始
+                FadePlayer.m_Instance.Play(1, 0, 1, null, () =>
+                {
+                    IFadeCallbacker fadeCallbacker = (IFadeCallbacker)component;
+                    fadeCallbacker?.OnAfterFade();
+                });
+
                 break;
             }
         }
