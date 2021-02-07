@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5411662240566350129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5411662240566350130}
+  - component: {fileID: 5411662240566350131}
+  - component: {fileID: 5411662240566350124}
+  m_Layer: 0
+  m_Name: StageGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5411662240566350130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411662240566350129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5411662240566350131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411662240566350129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ac4304758097042bc2d5267102f4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GRASS_SOIL_OBJECT: {fileID: 2156663769091647396, guid: 3513c3588627ba84c849735238141f80,
+    type: 3}
+  GRASS_SAND_OBJECT: {fileID: 255674413724167948, guid: 39ab5610f11dd6e4cab3df1f7b868509,
+    type: 3}
+  BREAK_BLOCK_OBJECT: {fileID: 8894556759469906951, guid: ef50c9d4d3b30e2459637d2df83142fe,
+    type: 3}
+  SOIL_OBJECT: {fileID: 8615301886069525391, guid: 37e60488092a818499593f3b6d7241f2,
+    type: 3}
+  SAND_OBJECT: {fileID: 534369888208843230, guid: 9fb2f7317f7df74408cc7a1629b1886f,
+    type: 3}
+  COIN_BLOCK_OBJECT: {fileID: 1374829463373011219, guid: 6cc7d635a2ef65740a31d601adae4c6a,
+    type: 3}
+  ITEM_BLOCK_OBJECT: {fileID: 2469544558013800482, guid: babde81c380b8824fb894bd9c98b8d23,
+    type: 3}
+  GET_BLOCK_OBJECT: {fileID: 4769083410891196579, guid: a587354bd5f9ae442a988487c788d8e7,
+    type: 3}
+--- !u!114 &5411662240566350124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411662240566350129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a8eea522f573148905dc67a67927a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
