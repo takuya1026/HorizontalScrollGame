@@ -58,6 +58,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
         if (m_instance == null)
         {
             m_instance = this as T;
+            DontDestroyOnLoad(this.gameObject);
             return true;
         }
         else if (m_Instance == this)
@@ -65,7 +66,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
             return true;
         }
 
-        Destroy(this);
+        Destroy(this.gameObject);
         return false;
     }
 }

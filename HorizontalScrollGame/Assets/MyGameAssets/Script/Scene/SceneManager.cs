@@ -8,29 +8,12 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 /// <summary>
 /// シーン管理クラス（シングルトン）
 /// </summary>
-public class SceneManager : MonoBehaviour
+public class SceneManager : SingletonMonoBehaviour<SceneManager>
 {
-    /// <summary>
-    /// インスタンス
-    /// </summary>
-    public static SceneManager m_Instance { get; private set; } = null;
-
     /// <summary>
     /// シーンヒストリー
     /// </summary>
     private Stack<string> m_sceneHistory = new Stack<string>();
-    
-    /// <summary>
-    /// 開始
-    /// </summary>
-    private void Awake()
-    {
-        if (m_Instance == null)
-        {
-            m_Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-    }
 
     // FIXME : 
     // LoadSceneでシーンをロードしたときにキャッシュしておき、
