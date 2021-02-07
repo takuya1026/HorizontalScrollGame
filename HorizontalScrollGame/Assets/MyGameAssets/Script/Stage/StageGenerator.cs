@@ -16,7 +16,7 @@ public class StageGenerator : MonoBehaviour
 {
     private LoadDataFile m_loadDataFile = null;
     private GameObject m_emptyObject = null;
-    private bool isA = false;
+    private bool isCreateStage = false;
 
     // private readonly
     private readonly string COMMON_PATH = "Assets/MyGameAssets/Stage/DataFiles/";
@@ -68,11 +68,11 @@ public class StageGenerator : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (isA)
+        if (isCreateStage)
         {
             return;
         }
-        isA = true;
+        isCreateStage = true;
 
         m_loadDataFile.Remove();
         m_loadDataFile.LoadFile(COMMON_PATH + "Stage01.csv");
@@ -88,9 +88,9 @@ public class StageGenerator : MonoBehaviour
         drow();
     }
 
-    //==================================================
-    //  @brief drow
-    //==================================================
+    /// <summary>
+    /// 描画
+    /// </summary>
     public void drow()
     {
         for (int i = 0, length = StageController.m_Instance.m_Length; i < length; i++)
@@ -132,18 +132,22 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
+        // NOTE: オブジェクトが逆になるため、反転させる
         GameObject stageData = GameObject.Find("_StageData");
         stageData.transform.Rotate(new Vector3(0.0f, 0.0f, 180.0f));
     }
 
-    //==================================================
-    //  @brief placement
-    //==================================================
+    /// <summary>
+    /// オブジェクトの配置
+    /// </summary>
+    /// <param name="originalObject">オブジェクト</param>
+    /// <param name="position">ポジション</param>
+    /// <param name="name">オブジェクト名前</param>
     private void placement(GameObject originalObject, Vector3 position, string name)
     {
         if (! originalObject)
         {
-            Debug.Log("ERROR: wall object is null. (StageController#placement)");
+            Debug.Log("ERROR: original object is null. (StageController#placement)");
             return;
         }
 
