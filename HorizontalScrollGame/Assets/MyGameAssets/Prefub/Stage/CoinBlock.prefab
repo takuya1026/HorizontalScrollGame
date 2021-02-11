@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enumBlockType: 6
-  m_itemId: 0
-  m_quantity: 0
+  m_itemId: 10000
+  m_quantity: 10
 --- !u!114 &7145145686041790493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08f072ccf61c414dbfaf1c965e7252b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_parentName: Stage
+  m_parentName: SoilElement_003
