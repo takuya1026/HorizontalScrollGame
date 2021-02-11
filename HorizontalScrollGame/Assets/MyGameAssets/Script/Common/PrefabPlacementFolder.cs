@@ -26,7 +26,6 @@ namespace Hexat.Editor
                 GameObject parentObject = GameObject.Find(m_parentName);
                 if (parentObject == null)
                 {
-                    Debug.Log("parent object 【 " + m_parentName + " 】is not. (PrefabPlacementFolder#Awake)");
                     return;
                 }
 

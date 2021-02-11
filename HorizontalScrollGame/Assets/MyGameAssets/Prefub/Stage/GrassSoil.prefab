@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3115151899221732509}
   - component: {fileID: 864642232414257306}
   - component: {fileID: 8242304967416466471}
-  - component: {fileID: 3773273642655352035}
   - component: {fileID: -8402509072707751856}
+  - component: {fileID: 3773273642655352035}
   - component: {fileID: -8780586554018871032}
   m_Layer: 0
   m_Name: GrassSoil
@@ -96,21 +96,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3773273642655352035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124869076170780528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4325482ab95eb904194bc928c26fcb77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_enumBlockType: 1
-  m_itemId: 0
-  m_quantity: 0
 --- !u!114 &-8402509072707751856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +116,21 @@ MonoBehaviour:
   isOdd: 1
   _horizontalPivot: 0
   _verticalPivot: 0
+--- !u!114 &3773273642655352035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124869076170780528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4325482ab95eb904194bc928c26fcb77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enumBlockType: 1
+  m_itemId: 0
+  m_quantity: 0
 --- !u!114 &-8780586554018871032
 MonoBehaviour:
   m_ObjectHideFlags: 0

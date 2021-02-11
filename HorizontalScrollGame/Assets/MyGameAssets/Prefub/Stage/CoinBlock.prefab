@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3454616372161877803}
   - component: {fileID: 3356317277115768210}
   - component: {fileID: 5382681367548406301}
-  - component: {fileID: 7893337423644100094}
   - component: {fileID: 7145145686041790493}
+  - component: {fileID: 7893337423644100094}
   - component: {fileID: -3108283137383657436}
   m_Layer: 0
   m_Name: CoinBlock
@@ -96,21 +96,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7893337423644100094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8416313026393785191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4325482ab95eb904194bc928c26fcb77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_enumBlockType: 6
-  m_itemId: 10000
-  m_quantity: 10
 --- !u!114 &7145145686041790493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +116,21 @@ MonoBehaviour:
   isOdd: 1
   _horizontalPivot: 0
   _verticalPivot: 0
+--- !u!114 &7893337423644100094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8416313026393785191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4325482ab95eb904194bc928c26fcb77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enumBlockType: 6
+  m_itemId: 10000
+  m_quantity: 10
 --- !u!114 &-3108283137383657436
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9054380099028684408}
   - component: {fileID: 8308002773094208830}
   - component: {fileID: 7110776637741225166}
-  - component: {fileID: 6770398450714321760}
   - component: {fileID: 2459626272144808973}
+  - component: {fileID: 6770398450714321760}
   - component: {fileID: 4059169911969422821}
   m_Layer: 0
   m_Name: BreakBlock
@@ -96,21 +96,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6770398450714321760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5549185134623824524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4325482ab95eb904194bc928c26fcb77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_enumBlockType: 3
-  m_itemId: 0
-  m_quantity: 0
 --- !u!114 &2459626272144808973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +116,21 @@ MonoBehaviour:
   isOdd: 1
   _horizontalPivot: 0
   _verticalPivot: 0
+--- !u!114 &6770398450714321760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549185134623824524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4325482ab95eb904194bc928c26fcb77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enumBlockType: 3
+  m_itemId: 0
+  m_quantity: 0
 --- !u!114 &4059169911969422821
 MonoBehaviour:
   m_ObjectHideFlags: 0
