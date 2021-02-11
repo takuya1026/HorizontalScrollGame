@@ -75,8 +75,8 @@ public class MasterDataUpdater : EditorWindow
     /// </summary>
     public static async Task<UserCredential> AuthorizeAsync()
     {
-        string clientId = "929890708409-pvnnsrrfkqbgd1bd5eq5ouslv5ptgmlr.apps.googleusercontent.com";
-        string clientSecret = "SFmqAlXeGvY72bYCBYv7P492";
+        string clientId = "";
+        string clientSecret = "";
         var user = $"{Application.productName}_{Environment.UserName}";
 
         var secrets = new ClientSecrets
