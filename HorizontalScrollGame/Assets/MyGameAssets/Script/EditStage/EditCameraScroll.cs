@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// エディット：カメラスクロール
 /// </summary>
 public class EditCameraScroll : MonoBehaviour
 {
