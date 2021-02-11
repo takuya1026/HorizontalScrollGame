@@ -1,0 +1,181 @@
+{
+    "m_stageName": "Stage_00001",
+    "m_resultBlockInfo": [
+        {
+            "m_name": "Soil",
+            "m_postion": {
+                "x": -11.5,
+                "y": -3.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 4,
+            "m_itemId": 0,
+            "m_quantity": 0
+        },
+        {
+            "m_name": "Sand",
+            "m_postion": {
+                "x": -13.5,
+                "y": -3.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 5,
+            "m_itemId": 0,
+            "m_quantity": 0
+        },
+        {
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -12.5,
+                "y": -0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 10001,
+            "m_quantity": 1
+        },
+        {
+            "m_name": "GrassSoil",
+            "m_postion": {
+                "x": -10.5,
+                "y": 0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 1,
+            "m_itemId": 0,
+            "m_quantity": 0
+        },
+        {
+            "m_name": "GrassSand",
+            "m_postion": {
+                "x": -8.5,
+                "y": -3.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 2,
+            "m_itemId": 0,
+            "m_quantity": 0
+        },
+        {
+            "m_name": "GetBlock",
+            "m_postion": {
+                "x": -15.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 8,
+            "m_itemId": 0,
+            "m_quantity": 0
+        },
+        {
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -8.5,
+                "y": -0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 50001,
+            "m_quantity": 10
+        },
+        {
+            "m_name": "BreakBlock",
+            "m_postion": {
+                "x": -6.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 3,
+            "m_itemId": 0,
+            "m_quantity": 0
+        }
+    ]
+}
