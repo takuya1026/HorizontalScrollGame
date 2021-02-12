@@ -215,17 +215,17 @@ PrefabInstance:
     - target: {fileID: 8783896790509128970, guid: b964793dadbb46c459dfec2155db7593,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8783896790509128970, guid: b964793dadbb46c459dfec2155db7593,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8783896790509128970, guid: b964793dadbb46c459dfec2155db7593,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8783896790509128970, guid: b964793dadbb46c459dfec2155db7593,
         type: 3}
@@ -257,6 +257,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 8783896790509128973, guid: b964793dadbb46c459dfec2155db7593,
+        type: 3}
+      propertyPath: DEFAULT_STAGE_OBJECT
+      value: 
+      objectReference: {fileID: 9140538884947161909, guid: f62b44db6f50ced41b20c7a573cfd405,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b964793dadbb46c459dfec2155db7593, type: 3}
 --- !u!1 &1079250391

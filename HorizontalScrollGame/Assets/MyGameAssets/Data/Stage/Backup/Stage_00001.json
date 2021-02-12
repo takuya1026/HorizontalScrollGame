@@ -1,0 +1,797 @@
+{
+    "m_stageName": "Stage_00001",
+    "m_resultBlockInfo": [
+        {
+            "m_parentName": "Stage",
+            "m_name": "Stage",
+            "m_postion": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 0,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "SoilGroup",
+            "m_name": "SoilGroup",
+            "m_postion": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 0,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "SoilElement_001",
+            "m_name": "SoilElement_001",
+            "m_postion": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 0,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "Soil",
+            "m_name": "Soil",
+            "m_postion": {
+                "x": -9.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 4,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "Soil",
+            "m_name": "Soil",
+            "m_postion": {
+                "x": -8.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 4,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "Soil",
+            "m_name": "Soil",
+            "m_postion": {
+                "x": -7.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 4,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "Soil",
+            "m_name": "Soil",
+            "m_postion": {
+                "x": -6.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 4,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "Soil",
+            "m_name": "Soil",
+            "m_postion": {
+                "x": -5.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 4,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "SoilElement_002",
+            "m_name": "SoilElement_002",
+            "m_postion": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 0,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "ItemBlock",
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -9.5,
+                "y": 0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "ItemBlock",
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -8.5,
+                "y": 0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "ItemBlock",
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -8.5,
+                "y": 1.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "ItemBlock",
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -7.5,
+                "y": 1.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "ItemBlock",
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -7.5,
+                "y": 2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "ItemBlock",
+            "m_name": "ItemBlock",
+            "m_postion": {
+                "x": -6.5,
+                "y": 2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 7,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "TestGroup",
+            "m_name": "TestGroup",
+            "m_postion": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 0,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "SoilElement_003",
+            "m_name": "SoilElement_003",
+            "m_postion": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 0,
+            "m_itemId": 0,
+            "m_quantity": 0,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -2.5,
+                "y": -0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -2.5,
+                "y": 0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -1.5,
+                "y": 1.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -0.5,
+                "y": 2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 0.4999999403953552,
+                "y": 3.499999761581421,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 1.5,
+                "y": 3.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 2.5,
+                "y": 2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 3.5,
+                "y": 1.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 4.5,
+                "y": 0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 4.5,
+                "y": -0.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -1.5,
+                "y": -1.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": -0.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 0.5,
+                "y": -3.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 1.4999998807907105,
+                "y": -3.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 2.5,
+                "y": -2.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        },
+        {
+            "m_parentName": "CoinBlock",
+            "m_name": "CoinBlock",
+            "m_postion": {
+                "x": 3.5,
+                "y": -1.5,
+                "z": 0.0
+            },
+            "m_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0,
+                "w": 0.0
+            },
+            "m_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "m_enumBlockType": 6,
+            "m_itemId": 10000,
+            "m_quantity": 10,
+            "m_child": []
+        }
+    ]
+}
