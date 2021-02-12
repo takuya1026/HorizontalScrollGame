@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 /// <summary>
 /// マスターデータの更新を行うウィンドウ
@@ -75,8 +76,11 @@ public class MasterDataUpdater : EditorWindow
     /// </summary>
     public static async Task<UserCredential> AuthorizeAsync()
     {
-        string clientId = "";
-        string clientSecret = "";
+        // APIのキー情報取得
+        string secret = File.ReadAllText("Packages/client_secret.json", Encoding.UTF8);
+        JObject secretData = JObject.Parse(secret);
+        string clientId = (string)secretData["installed"]["client_id"];
+        string clientSecret = (string)secretData["installed"]["client_secret"];
         var user = $"{Application.productName}_{Environment.UserName}";
 
         var secrets = new ClientSecrets
