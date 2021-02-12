@@ -19,11 +19,11 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
     private List<int> m_gropObjectIndex = new List<int>();
     private Dictionary<string, GameObject> m_gropObject = new Dictionary<string, GameObject>();
 
-    [SerializeField, Tooltip("デフォルトブロック")]
+    [SerializeField, Tooltip("デフォルトブロックオブジェクト")]
     private GameObject DEFAULT_BLOCK_OBJECT = null;
 
     /// <summary>
-    /// 描画
+    /// ステージオブジェクトの生成
     /// </summary>
     public void Generate(StageInfo stageInfo)
     {
@@ -31,7 +31,7 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
         m_gropObjectIndex.Clear();
         m_gropObject.Clear();
 
-        if (! DEFAULT_BLOCK_OBJECT)
+        if (DEFAULT_BLOCK_OBJECT == null)
         {
             Debug.Log("ERROR: default block object is null. (StageController#placement)");
             return;
@@ -45,14 +45,18 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
         }
 
         m_parentObject = new GameObject(stageInfo.m_stageName);
-        GameObject groupObject = null;
-        GameObject elementObject = null;
-        GameObject blockObject = null;
-        BlockInfo blockInfo = null;
 
-        string oldGroupObjectName = "";
-        string oldElementObjectName = "";
+        createIntermediaryObject(stageInfo);
 
+        createBlockObject(stageInfo);
+    }
+
+    /// <summary>
+    /// 各仲業者オブジェクトの生成
+    /// </summary>
+    /// <param name="stageInfo">ステージ情報</param>
+    private void createIntermediaryObject(StageInfo stageInfo)
+    {
         for (int i = 0, length = stageInfo.m_resultBlockInfo.Length; i < length; i++)
         {
             if (m_parentObject == null)
@@ -60,40 +64,38 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
                 continue;
             }
 
-            if (stageInfo.m_resultBlockInfo[i].m_name.IndexOf("Group") >= 0
-             && stageInfo.m_resultBlockInfo[i].m_name != oldGroupObjectName)
+            if (createParentLinkObject(stageInfo, i, "Stage", m_parentObject))
             {
-                if (m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_name))
-                {
-                    continue;
-                }
-
-                groupObject = new GameObject(stageInfo.m_resultBlockInfo[i].m_name);
-                groupObject.transform.parent = m_parentObject.transform;
-                oldGroupObjectName = stageInfo.m_resultBlockInfo[i].m_name;
-                m_gropObjectIndex.Add(i);
-                m_gropObject.Add(stageInfo.m_resultBlockInfo[i].m_name, groupObject);
                 continue;
             }
 
-            if (stageInfo.m_resultBlockInfo[i].m_name.IndexOf("Element") >= 0
-             && stageInfo.m_resultBlockInfo[i].m_name != oldElementObjectName)
+            if (!m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_parentName))
             {
-                if (m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_name))
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                elementObject = new GameObject(stageInfo.m_resultBlockInfo[i].m_name);
-                elementObject.transform.parent = groupObject.transform;
-                oldElementObjectName = stageInfo.m_resultBlockInfo[i].m_name;
-                m_gropObjectIndex.Add(i);
-                m_gropObject.Add(stageInfo.m_resultBlockInfo[i].m_name, elementObject);
+            if (createParentLinkObject(stageInfo, i, "Group", m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName]))
+            {
+                continue;
+            }
+
+            if (createParentLinkObject(stageInfo, i, "Element", m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName]))
+            {
                 continue;
             }
         }
+    }
 
+    /// <summary>
+    /// 各ブロックオブジェクトの生成
+    /// </summary>
+    /// <param name="stageInfo">ステージ情報</param>
+    private void createBlockObject(StageInfo stageInfo)
+    {
+        GameObject newObject = null;
+        BlockInfo blockInfo = null;
         int imageIndex = 0;
+
         for (int i = 0, length = stageInfo.m_resultBlockInfo.Length; i < length; i++)
         {
             if (m_gropObjectIndex.IndexOf(i) >= 0)
@@ -106,23 +108,42 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
                 continue;
             }
 
-            blockObject = Instantiate(DEFAULT_BLOCK_OBJECT);
-            blockObject.name = stageInfo.m_resultBlockInfo[i].m_name;
-            blockObject.transform.position = stageInfo.m_resultBlockInfo[i].m_postion;
-            blockObject.transform.rotation = stageInfo.m_resultBlockInfo[i].m_rotation;
-            blockObject.transform.localScale = stageInfo.m_resultBlockInfo[i].m_scale;
+            newObject = Instantiate(DEFAULT_BLOCK_OBJECT);
+            newObject.name = stageInfo.m_resultBlockInfo[i].m_name;
+            newObject.transform.position = stageInfo.m_resultBlockInfo[i].m_postion;
+            newObject.transform.rotation = stageInfo.m_resultBlockInfo[i].m_rotation;
+            newObject.transform.localScale = stageInfo.m_resultBlockInfo[i].m_scale;
 
-            blockInfo = blockObject.GetComponent<BlockInfo>();
+            blockInfo = newObject.GetComponent<BlockInfo>();
             blockInfo.m_EnumBlockType = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
             blockInfo.m_ItemId = stageInfo.m_resultBlockInfo[i].m_itemId;
             blockInfo.m_Quantity = stageInfo.m_resultBlockInfo[i].m_quantity;
 
             imageIndex = (int)stageInfo.m_resultBlockInfo[i].m_enumBlockType;
-            blockObject.GetComponent<Renderer>().sharedMaterial = (Material)Resources.Load("Texture/Stage/Materials/MapTexture" + imageIndex.ToString("D2"));
+            newObject.GetComponent<Renderer>().sharedMaterial = (Material)Resources.Load("Texture/Stage/Materials/MapTexture" + imageIndex.ToString("D2"));
 
-            blockObject.transform.parent = m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName].transform;
+            newObject.transform.parent = m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName].transform;
         }
+    }
 
-
+    /// <summary>
+    /// 親にリンクさせたオブジェクトを作成する
+    /// </summary>
+    /// <param name="stageInfo">ステージ情報</param>
+    /// <param name="index">ステージ情報の添え字</param>
+    /// <param name="searchName">検索オブジェクト</param>
+    /// <param name="parentObject">親の名前</param>
+    /// <returns>true：オブジェクト生成</returns>
+    private bool createParentLinkObject(StageInfo stageInfo, int index, string searchName, GameObject parentObject)
+    {
+        if (stageInfo.m_resultBlockInfo[index].m_name.IndexOf(searchName) >= 0)
+        {
+            GameObject newObject = new GameObject(stageInfo.m_resultBlockInfo[index].m_name);
+            newObject.transform.parent = parentObject.transform;
+            m_gropObjectIndex.Add(index);
+            m_gropObject.Add(stageInfo.m_resultBlockInfo[index].m_name, newObject);
+            return true;
+        }
+        return false;
     }
 }
