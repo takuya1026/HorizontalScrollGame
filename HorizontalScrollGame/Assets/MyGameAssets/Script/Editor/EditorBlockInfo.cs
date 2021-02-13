@@ -14,11 +14,17 @@ public class EditorBlockInfo : Editor
 {
     private BlockInfo _target;
 
+    /// <summary>
+    /// 開始
+    /// </summary>
     private void Awake()
     {
         _target = target as BlockInfo;
     }
 
+    /// <summary>
+    /// インスペクターの変更
+    /// </summary>
     public override void OnInspectorGUI()
     {
         _target.m_EnumBlockType = (EnumBlockType)EditorGUILayout.EnumPopup("Enum Block Type", _target.m_EnumBlockType);

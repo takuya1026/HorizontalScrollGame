@@ -21,6 +21,9 @@ namespace Hexat.Editor
         private GameObject m_parentObject = null;
         private UnpackPrefub m_parentUnpackPrefub = null;
 
+        [SerializeField, Tooltip("親のプレハブ状態を無視する")]
+        private bool m_isParentIgnore = false;
+
         /// <summary>
         /// プレハブ状態を解除済みか
         /// </summary>
@@ -34,7 +37,7 @@ namespace Hexat.Editor
         {
             if (gameObject != null)
             {
-                if (gameObject.transform.parent != null && gameObject.transform.parent.gameObject != null)
+                if (m_isParentIgnore == false && gameObject.transform.parent != null && gameObject.transform.parent.gameObject != null)
                 {
                     m_parentObject = gameObject.transform.parent.gameObject;
                     m_parentUnpackPrefub = m_parentObject.GetComponent<UnpackPrefub>();

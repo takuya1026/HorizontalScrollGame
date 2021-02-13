@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275be60f49d5c64daf77281635fe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isParentIgnore: 0
 --- !u!1 &4510650555266348618
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5549149932020189602}
   - component: {fileID: 4099216330359376213}
+  - component: {fileID: -3184823334274790147}
   m_Layer: 0
   m_Name: GrassSoil_Group
   m_TagString: Untagged
@@ -87,3 +89,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275be60f49d5c64daf77281635fe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isParentIgnore: 1
+--- !u!114 &-3184823334274790147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4510650555266348618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08f072ccf61c414dbfaf1c965e7252b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_parentName: Stage

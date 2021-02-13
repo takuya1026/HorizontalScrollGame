@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275be60f49d5c64daf77281635fe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isParentIgnore: 1
 --- !u!114 &9194801830597290533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,4 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08f072ccf61c414dbfaf1c965e7252b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isEnableParentSearchByID: 1
   m_parentName: Soil_Element_001
+  m_parentId: 1

@@ -25,30 +25,14 @@ public class JsonExport : MonoBehaviour
     /// </summary>
     public void SeavStageInfo()
     {
-        GameObject childObject = null;
-        int count = 0;
-
-        m_obj = new StageInfo();
-
         if (m_parentObj == null)
         {
-            count = getNextFileNumber();
-            m_parentObj = new GameObject("Stage_" + count.ToString("D5"));
-
-            childObject = new GameObject("Stage");
-            childObject.transform.parent = m_parentObj.transform;
-
-            childObject = new GameObject("Enemy");
-            childObject.transform.parent = m_parentObj.transform;
-
-            childObject = new GameObject("Gimmick");
-            childObject.transform.parent = m_parentObj.transform;
+            Debug.Log("ERORR: There is no parent object. (JsonExport#SeavStageInfo)");
+            return;
         }
-        else
-        {
-            count = getCurrentFileNumber();
-            m_obj.m_stageName = "Stage_" + count.ToString("D5");
-        }
+
+        m_obj = new StageInfo();
+        m_obj.m_stageName = m_parentObj.name;
 
         GameObject childCategoryObject = null;
         for (int categoryIndex = 0, categoryLength = getChildCount(m_parentObj); categoryIndex < categoryLength; categoryIndex++)
