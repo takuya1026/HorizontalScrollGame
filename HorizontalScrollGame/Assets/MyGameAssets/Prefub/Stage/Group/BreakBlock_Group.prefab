@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2721939158483537731}
   - component: {fileID: 3788898085306520948}
+  - component: {fileID: -8776518372767938154}
   m_Layer: 0
   m_Name: BreakBlock_Group
   m_TagString: Untagged
@@ -44,6 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275be60f49d5c64daf77281635fe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isParentIgnore: 1
+--- !u!114 &-8776518372767938154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501274034243034875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08f072ccf61c414dbfaf1c965e7252b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_parentName: Stage
 --- !u!1 &4231830382105253955
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,3 +102,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275be60f49d5c64daf77281635fe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isParentIgnore: 0
