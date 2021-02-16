@@ -59,6 +59,9 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     private Vector2 m_leftStick;
     private Vector2 m_rightStick;
     private Vector2 m_dirButton;
+    private Vector2 m_keyboardCross;
+
+    public Vector2 m_GetKeyboardCross => m_keyboardCross;
 
     /// <summary>
     /// 左スティックの入力値を返す
@@ -101,11 +104,35 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
         m_dirButton.y = Input.GetAxis(JoypadInputType.JOYPAD_DIR_HORIZONTAL.ToString());
     }
 
+    /// <summary>
+    /// Joypadの左、右スティク、左の十字キーの入力を取る
+    /// </summary>
     private void updateJoypad()
     {
         updateLeftStick();
         updateRightStick();
         updateDirectButton();
+    }
+
+    /// <summary>
+    /// キーボードの左右のみの入力を取る
+    /// </summary>
+    private void updateKeyboardClass()
+    {
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            m_keyboardCross.x = Vector2.left.x;
+        }
+        else if(Input.GetKey(KeyCode.RightArrow))
+        {
+            m_keyboardCross.x = Vector2.right.x;
+        }
+        else
+        {
+            m_keyboardCross.x = Vector2.zero.x;
+        }
+
+        m_keyboardCross.y = Vector2.zero.y;
     }
 
     /// <summary>
@@ -143,6 +170,7 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     private void Update()
     {
         updateJoypad();
+        updateKeyboardClass();
     }
 
     /// <summary>
