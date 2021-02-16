@@ -54,6 +54,8 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     [SerializeField, Header("操作可能領域を設定")]
     private float m_inputArea = 0.3f;
 
+    public float m_GetInputArea => m_inputArea;
+
     private Vector2 m_leftStick;
     private Vector2 m_rightStick;
     private Vector2 m_dirButton;
@@ -108,6 +110,13 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
 
     /// <summary>
     /// ボタンの入力状態を取る
+    /// 
+    /// 例：Aボタンを押した"瞬間"の情報を取る
+    /// if(GetButtonsPushType(JoypadInputType(JoypadInputType.JOYPAD_BUTTON_A) == PushType.PUSH)
+    /// {
+    ///     Debug.Log("押されています");
+    /// }
+    /// 
     /// </summary>
     /// <param name="buttonType"></param>
     /// <returns></returns>
