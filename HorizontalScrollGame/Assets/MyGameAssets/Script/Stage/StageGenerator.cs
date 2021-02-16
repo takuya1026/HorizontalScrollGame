@@ -2,7 +2,7 @@
 //============================================================
 // @file StageGenerator
 // @brief ステージ生成
-// @autor ochi takuya
+// @autor ochi.takuya
 //============================================================
 
 using System.Collections;
@@ -12,153 +12,138 @@ using UnityEngine;
 /// <summary>
 /// ステージ生成
 /// </summary>
-public class StageGenerator : MonoBehaviour
+public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
 {
-    private LoadDataFile m_loadDataFile = null;
-    private GameObject m_emptyObject = null;
-    private bool isCreateStage = false;
+    private GameObject m_parentObject = null;
 
-    // private readonly
-    private readonly string COMMON_PATH = "Assets/MyGameAssets/Stage/DataFiles/";
+    private List<int> m_gropObjectIndex = new List<int>();
+    private Dictionary<string, GameObject> m_gropObject = new Dictionary<string, GameObject>();
 
-    [SerializeField, Tooltip("草土")]
-    private GameObject GRASS_SOIL_OBJECT = null;
-
-    [SerializeField, Tooltip("草砂")]
-    private GameObject GRASS_SAND_OBJECT = null;
-
-    [SerializeField, Tooltip("ブロック(破壊)")]
-    private GameObject BREAK_BLOCK_OBJECT = null;
-
-    [SerializeField, Tooltip("土")]
-    private GameObject SOIL_OBJECT = null;
-
-    [SerializeField, Tooltip("砂")]
-    private GameObject SAND_OBJECT = null;
-
-    [SerializeField, Tooltip("ブロック(コイン)")]
-    private GameObject COIN_BLOCK_OBJECT = null;
-
-    [SerializeField, Tooltip("ブロック(アイテム)")]
-    private GameObject ITEM_BLOCK_OBJECT = null;
-
-    [SerializeField, Tooltip("ブロック(取得済み)")]
-    private GameObject GET_BLOCK_OBJECT = null;
+    [SerializeField, Tooltip("デフォルトブロックオブジェクト")]
+    private GameObject DEFAULT_BLOCK_OBJECT = null;
 
     /// <summary>
-    /// ロードファイル
+    /// ステージオブジェクトの生成
     /// </summary>
-    public LoadDataFile m_LoadDataFile { get { return m_loadDataFile; } }
-
-    /// <summary>
-    /// データ
-    /// </summary>
-    public List<string> m_Datas { get { return m_loadDataFile.m_Datas; } }
-
-    /// <summary>
-    /// 開始
-    /// </summary>
-    private void Awake()
+    public void Generate(StageInfo stageInfo)
     {
-        m_loadDataFile = new LoadDataFile();
-    }
+        // NOTE: エディタ実行をしないため、毎回初期化
+        m_gropObjectIndex.Clear();
+        m_gropObject.Clear();
 
-    /// <summary>
-    /// 更新
-    /// </summary>
-    private void Update()
-    {
-        if (isCreateStage)
+        if (DEFAULT_BLOCK_OBJECT == null)
         {
-            return;
-        }
-        isCreateStage = true;
-
-        m_loadDataFile.Remove();
-        m_loadDataFile.LoadFile(COMMON_PATH + "Stage01.csv");
-
-        if (m_loadDataFile.m_FileName == "" || m_loadDataFile.m_Datas == null)
-        {
-            Debug.LogError("ERROR: there are no files. (StageController#Create)");
+            Debug.Log("ERROR: default block object is null. (StageController#placement)");
             return;
         }
 
-        StageController.m_Instance.Create(m_loadDataFile);
+        m_parentObject = GameObject.Find(stageInfo.m_stageName);
+        if (m_parentObject != null)
+        {
+            Debug.Log("stage object 【 " + stageInfo.m_stageName  + " 】is Exists on the field. (StageGenerator#Generate)");
+            return;
+        }
 
-        drow();
+        m_parentObject = new GameObject(stageInfo.m_stageName);
+
+        createIntermediaryObject(stageInfo);
+
+        createBlockObject(stageInfo);
     }
 
     /// <summary>
-    /// 描画
+    /// 各仲業者オブジェクトの生成
     /// </summary>
-    public void drow()
+    /// <param name="stageInfo">ステージ情報</param>
+    private void createIntermediaryObject(StageInfo stageInfo)
     {
-        for (int i = 0, length = StageController.m_Instance.m_Length; i < length; i++)
+        for (int i = 0, length = stageInfo.m_resultBlockInfo.Length; i < length; i++)
         {
-            var cell = StageController.m_Instance.GetCell(i);
-            switch (cell.m_Type)
+            if (m_parentObject == null)
             {
-                case (int)StageInfo.GRASS_SOIL:
-                    placement(GRASS_SOIL_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("GrassSoil_" + i));
-                    break;
+                continue;
+            }
 
-                case (int)StageInfo.GRASS_SAND:
-                    placement(GRASS_SAND_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("GrassSand_" + i));
-                    break;
+            if (createParentLinkObject(stageInfo, i, "Stage", m_parentObject))
+            {
+                continue;
+            }
 
-                case (int)StageInfo.BREAK_BLOCK:
-                    placement(BREAK_BLOCK_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("BreakBlock_" + i));
-                    break;
+            if (!m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_parentName))
+            {
+                continue;
+            }
 
-                case (int)StageInfo.SOIL:
-                    placement(SOIL_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("Soil_" + i));
-                    break;
+            if (createParentLinkObject(stageInfo, i, "Group", m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName]))
+            {
+                continue;
+            }
 
-                case (int)StageInfo.SAND:
-                    placement(SAND_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("Sand_" + i));
-                    break;
-
-                case (int)StageInfo.COIN_BLOCK:
-                    placement(COIN_BLOCK_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("CoinBlock_" + i));
-                    break;
-
-                case (int)StageInfo.ITEM_BLOCK:
-                    placement(ITEM_BLOCK_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("ItemBlock_" + i));
-                    break;
-
-                case (int)StageInfo.GET_BLOCK:
-                    placement(GET_BLOCK_OBJECT, new Vector3(cell.m_X, cell.m_Y, 0.0f), ("GetBlock_" + i));
-                    break;
+            if (createParentLinkObject(stageInfo, i, "Element", m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName]))
+            {
+                continue;
             }
         }
-
-        // NOTE: オブジェクトが逆になるため、反転させる
-        GameObject stageData = GameObject.Find("_StageData");
-        stageData.transform.Rotate(new Vector3(0.0f, 0.0f, 180.0f));
     }
 
     /// <summary>
-    /// オブジェクトの配置
+    /// 各ブロックオブジェクトの生成
     /// </summary>
-    /// <param name="originalObject">オブジェクト</param>
-    /// <param name="position">ポジション</param>
-    /// <param name="name">オブジェクト名前</param>
-    private void placement(GameObject originalObject, Vector3 position, string name)
+    /// <param name="stageInfo">ステージ情報</param>
+    private void createBlockObject(StageInfo stageInfo)
     {
-        if (! originalObject)
-        {
-            Debug.Log("ERROR: original object is null. (StageController#placement)");
-            return;
-        }
+        GameObject newObject = null;
+        BlockInfo blockInfo = null;
+        int imageIndex = 0;
 
-        if (! m_emptyObject)
+        for (int i = 0, length = stageInfo.m_resultBlockInfo.Length; i < length; i++)
         {
-            m_emptyObject = new GameObject("_StageData");
-        }
+            if (m_gropObjectIndex.IndexOf(i) >= 0)
+            {
+                continue;
+            }
 
-        GameObject newObject = Instantiate(originalObject, position, Quaternion.identity);
-        newObject.name = name;
-        newObject.transform.Rotate(new Vector3(0.0f, 0.0f, -180.0f));
-        newObject.transform.parent = m_emptyObject.transform;
+            if (!m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_parentName))
+            {
+                continue;
+            }
+
+            newObject = Instantiate(DEFAULT_BLOCK_OBJECT);
+            newObject.name = stageInfo.m_resultBlockInfo[i].m_name;
+            newObject.transform.position = stageInfo.m_resultBlockInfo[i].m_postion;
+            newObject.transform.rotation = stageInfo.m_resultBlockInfo[i].m_rotation;
+            newObject.transform.localScale = stageInfo.m_resultBlockInfo[i].m_scale;
+
+            blockInfo = newObject.GetComponent<BlockInfo>();
+            blockInfo.m_EnumBlockType = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
+            blockInfo.m_ItemId = stageInfo.m_resultBlockInfo[i].m_itemId;
+            blockInfo.m_Quantity = stageInfo.m_resultBlockInfo[i].m_quantity;
+
+            imageIndex = (int)stageInfo.m_resultBlockInfo[i].m_enumBlockType;
+            newObject.GetComponent<Renderer>().sharedMaterial = (Material)Resources.Load("Texture/Stage/Materials/MapTexture" + imageIndex.ToString("D2"));
+
+            newObject.transform.parent = m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName].transform;
+        }
+    }
+
+    /// <summary>
+    /// 親にリンクさせたオブジェクトを作成する
+    /// </summary>
+    /// <param name="stageInfo">ステージ情報</param>
+    /// <param name="index">ステージ情報の添え字</param>
+    /// <param name="searchName">検索オブジェクト</param>
+    /// <param name="parentObject">親の名前</param>
+    /// <returns>true：オブジェクト生成</returns>
+    private bool createParentLinkObject(StageInfo stageInfo, int index, string searchName, GameObject parentObject)
+    {
+        if (stageInfo.m_resultBlockInfo[index].m_name.IndexOf(searchName) >= 0)
+        {
+            GameObject newObject = new GameObject(stageInfo.m_resultBlockInfo[index].m_name);
+            newObject.transform.parent = parentObject.transform;
+            m_gropObjectIndex.Add(index);
+            m_gropObject.Add(stageInfo.m_resultBlockInfo[index].m_name, newObject);
+            return true;
+        }
+        return false;
     }
 }
