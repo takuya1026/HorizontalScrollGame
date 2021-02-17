@@ -167,6 +167,24 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
         return PushType.NONE;
     }
 
+    public PushType GetKeyboardPushType(KeyCode key)
+    {
+        if (Input.GetKeyDown(key))
+        {
+            return PushType.PUSH;
+        }
+        if (Input.GetKeyDown(key))
+        {
+            return PushType.KEEP_PUSH;
+        }
+        if (Input.GetKeyDown(key))
+        {
+            return PushType.RELEASE;
+        }
+
+        return PushType.NONE;
+    }
+
     private void Update()
     {
         updateJoypad();

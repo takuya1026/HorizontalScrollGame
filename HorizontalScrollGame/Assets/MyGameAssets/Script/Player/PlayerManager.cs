@@ -24,9 +24,9 @@ public class PlayerManager : MonoBehaviour
         m_playerMover.Init(m_playerMoveData, m_rigidbody,transform);
     }
 
-    private void OnChangeDir(Vector3 dir)
+    private void OnChangeDir(Vector3 dir ,bool isJump)
     {
-        m_playerMover.OnChageDir(dir);
+        m_playerMover.OnChageDir(dir,isJump);
     }
     private void Update()
     {

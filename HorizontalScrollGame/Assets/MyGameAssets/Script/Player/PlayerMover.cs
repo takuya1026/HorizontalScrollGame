@@ -12,6 +12,7 @@ public class PlayerMover
     private Rigidbody       m_rigidbody;
     private Transform       m_playerTransform;
     public  bool            m_isGround;
+    public  bool            m_isJump;
     private int             m_jumpCount = 0;
 
     /// <summary>
@@ -32,9 +33,10 @@ public class PlayerMover
     /// 方向を変更
     /// </summary>
     /// <param name="dir"></param>変更後の方向
-    public void OnChageDir(Vector3 dir)
+    public void OnChageDir(Vector3 dir,bool isJump)
     {
         m_direction = dir;
+        m_isJump = isJump;
     }
 
     /// <summary>
@@ -103,7 +105,7 @@ public class PlayerMover
         }
 
         //ジャンプ
-        if (inputManger.GetButtonsPushType(JoypadInputType.JOYPAD_BUTTON_A) == PushType.PUSH)
+        if (m_isJump)
         {
             if (m_jumpCount >= 2) return;
 

@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 public class PlayerInput
 {
-    private UnityAction<Vector3>    m_chageInputCallback;
+    private UnityAction<Vector3,bool>    m_chageInputCallback;
     
-    public void Init(UnityAction<Vector3> chageInputCallback)
+    public void Init(UnityAction<Vector3,bool> chageInputCallback)
     {
         m_chageInputCallback = chageInputCallback;
     }
@@ -16,9 +16,9 @@ public class PlayerInput
         Vector3 dir     = Vector3.zero;
 
         input   = Input(input);
-        dir     = GetDirFromInput(input,dir);
+        dir     = GetDirFromInput(dir,input);
 
-        m_chageInputCallback(dir);
+        m_chageInputCallback(dir, isJump());
     }
 
     /// <summary>
@@ -47,6 +47,30 @@ public class PlayerInput
         }
 
         return input;
+    }
+
+    /// <summary>
+    /// ジャンプをする
+    /// </summary>
+    /// <returns></returns>
+    private bool isJump()
+    {
+        InputManager inputManger = InputManager.m_Instance;
+
+        //A
+        bool isJoypad   = inputManger.GetButtonsPushType(JoypadInputType.JOYPAD_BUTTON_A) == PushType.PUSH;
+        //Space
+        bool isKeyboard = inputManger.GetKeyboardPushType(KeyCode.Space)                  == PushType.PUSH;
+
+        bool isJump = isJoypad || isKeyboard;
+        if (isJump)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
