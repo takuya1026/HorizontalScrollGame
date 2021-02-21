@@ -153,8 +153,6 @@ public class PlayerMover
         m_playerTransform.rotation = Quaternion.Lerp(m_playerTransform.rotation, Quaternion.Euler(m_rotate), m_playerMoveData.m_GetRotateSpeed * Time.deltaTime);
     }
 
-
-
     /// <summary>
     /// 地面についてるかを判定
     /// </summary>

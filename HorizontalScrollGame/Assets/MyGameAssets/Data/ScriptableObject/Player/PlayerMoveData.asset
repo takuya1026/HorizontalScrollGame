@@ -17,3 +17,4 @@ MonoBehaviour:
   m_jumpPowerPhase2: 150000
   m_playerGravity: -50
   m_rayRange: 0.9
+  m_rotateSpeed: 25
