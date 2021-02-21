@@ -13,15 +13,18 @@ public class PlayerManager : MonoBehaviour
     }
 
     [SerializeField] private PlayerMoveData m_playerMoveData = default;
-    [SerializeField] private Rigidbody m_rigidbody           = default;
+    [SerializeField] private Rigidbody      m_rigidbody      = default;
+    [SerializeField] private Animator       m_animator       = default;
 
-    private PlayerInput  m_playerInput     = new PlayerInput();
-    private PlayerMover  m_playerMover    = new PlayerMover();
+    private PlayerInput     m_playerInput      = new PlayerInput();
+    private PlayerMover     m_playerMover      = new PlayerMover();
+    private PlayerAnimation m_playerAnimation  = new PlayerAnimation();
 
     private void Awake()
     {
         m_playerInput.Init(OnChangeDir);
         m_playerMover.Init(m_playerMoveData, m_rigidbody,transform);
+        m_playerAnimation.Init(m_animator);
     }
 
     private void OnChangeDir(Vector3 dir ,bool isJump)
@@ -32,6 +35,7 @@ public class PlayerManager : MonoBehaviour
     {
         m_playerInput.Update();
         m_playerMover.Update();
+        m_playerAnimation.Update();
     }
     private void FixedUpdate()
     {

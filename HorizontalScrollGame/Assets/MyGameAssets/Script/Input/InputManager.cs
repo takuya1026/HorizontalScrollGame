@@ -54,6 +54,10 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     [SerializeField, Header("操作可能領域を設定")]
     private float m_inputArea = 0.3f;
 
+    private float m_notInputTime;
+
+    public float m_GetNotInputTime => m_notInputTime;
+
     public float m_GetInputArea => m_inputArea;
 
     private Vector2 m_leftStick;
@@ -189,6 +193,7 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     {
         updateJoypad();
         updateKeyboardClass();
+        CountNotInputTime();
     }
 
     /// <summary>
@@ -234,5 +239,35 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
         }
 
         return PushDirection.NONE;
+    }
+
+    /// <summary>
+    /// 入力されたかを返す
+    /// </summary>
+    /// <param name="input"></param>入力値を返す
+    /// <returns></returns>
+    private bool IsCurrentInput(Vector2 input)
+    {
+        return (input.magnitude > 0.01f) ? true : false; 
+    }
+
+    /// <summary>
+    /// 入力されていない時間を取得
+    /// </summary>
+    private void CountNotInputTime()
+    {
+        bool isCount = IsCurrentInput(m_leftStick)  ||
+                       IsCurrentInput(m_rightStick) ||
+                       IsCurrentInput(m_dirButton)  || //Pad
+                       IsCurrentInput(m_keyboardCross); //Keyboard
+
+        if (isCount)
+        {
+            m_notInputTime = 0f;
+        }
+        else
+        {
+            m_notInputTime += Time.deltaTime;
+        }
     }
 }

@@ -7,6 +7,7 @@ public class PlayerMover
 {
     private Vector3         m_direction;
     private Vector3         m_velocity;
+    private Vector3         m_rotate;
     private Ray             m_judgRay;
     private PlayerMoveData  m_playerMoveData;
     private Rigidbody       m_rigidbody;
@@ -14,6 +15,8 @@ public class PlayerMover
     public  bool            m_isGround;
     public  bool            m_isJump;
     private int             m_jumpCount = 0;
+
+    private float angle = 90;
 
     /// <summary>
     /// 初期化
@@ -27,6 +30,8 @@ public class PlayerMover
         m_rigidbody         = rigidbody;
         m_isGround          = true;
         m_playerTransform   = playerTrasform;
+
+        m_rotate.y = angle;
     }
 
     /// <summary>
@@ -46,6 +51,7 @@ public class PlayerMover
     {
         UpdateVelocity();
         Jump();
+        Rotate();
     }
 
     /// <summary>
@@ -122,6 +128,32 @@ public class PlayerMover
             m_jumpCount++;
         }
     }
+
+    /// <summary>
+    /// 回転
+    /// </summary>
+    private void Rotate()
+    {
+        InputManager inputManger = InputManager.m_Instance;
+
+        //右
+        if (m_direction.x > inputManger.m_GetInputArea)
+        {
+            m_rotate.y = angle;
+        }
+
+        //左
+        if(m_direction.x < -inputManger.m_GetInputArea)
+        {
+            m_rotate.y = -angle;
+        }
+
+        m_rotate = new Vector3(0f, m_rotate.y, 0f);
+       
+        m_playerTransform.rotation = Quaternion.Lerp(m_playerTransform.rotation, Quaternion.Euler(m_rotate), m_playerMoveData.m_GetRotateSpeed * Time.deltaTime);
+    }
+
+
 
     /// <summary>
     /// 地面についてるかを判定

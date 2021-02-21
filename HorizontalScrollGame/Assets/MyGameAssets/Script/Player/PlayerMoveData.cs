@@ -10,10 +10,12 @@ public class PlayerMoveData:ScriptableObject
     [SerializeField] private float m_jumpPowerPhase2 = default;
     [SerializeField] private float m_playerGravity = default;
     [SerializeField] private float m_rayRange = default;
+    [SerializeField] private float m_rotateSpeed = default;
 
     public float m_GetMoveSpeed => m_moveSpeed;
     public float m_GetJumpPowerPhase1 => m_jumpPowerPhase1;
     public float m_GetJumpPowerPhase2 => m_jumpPowerPhase2;
     public float m_GetPlayerGravity => m_playerGravity;
     public float m_GetRayRange => m_rayRange;
+    public float m_GetRotateSpeed => m_rotateSpeed;
 }
