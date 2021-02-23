@@ -69,5 +69,16 @@ namespace Utility
             deg %= ROTATE360;
             return deg;
         }
+
+        /// <summary>
+        /// 角度をベクトルに変換
+        /// </summary>
+        /// <param name="degree">角度</param>
+        /// <returns>変換後のベクトル</returns>
+        public static Vector3 AngleToVector(float degree)
+        {
+            float radAngle = degree * Mathf.Deg2Rad;
+            return new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
+        }
     }
 }
