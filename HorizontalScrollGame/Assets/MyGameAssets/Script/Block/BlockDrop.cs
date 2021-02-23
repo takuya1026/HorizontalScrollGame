@@ -19,11 +19,6 @@ public class BlockDrop : BlockBase
     [SerializeField, Tooltip("仮：アイテムが出来たら消す")]
     private GameObject tmpObj;
 
-    private void Update()
-    {
-        Execute();
-    }
-
     /// <summary>
     /// 初期化
     /// </summary>
