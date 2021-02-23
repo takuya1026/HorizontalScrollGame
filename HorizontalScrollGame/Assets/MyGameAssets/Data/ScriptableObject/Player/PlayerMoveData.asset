@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f17d61f636522a468cca6a1a9b58694, type: 3}
   m_Name: PlayerMoveData
   m_EditorClassIdentifier: 
-  m_moveSpeed: 250
+  m_moveSpeed: 350
   m_jumpPowerPhase1: 80000
   m_jumpPowerPhase2: 150000
   m_playerGravity: -50
   m_rayRange: 0.9
-  m_rotateSpeed: 25
+  m_rotateSpeed: 20

@@ -157,6 +157,7 @@ public class PlayerMover
     /// 地面についてるかを判定
     /// </summary>
     /// <returns></returns>
+    /// 
     private bool IsGround()
     {
         Vector3 rayStartPos = m_playerTransform.position;
