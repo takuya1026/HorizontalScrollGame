@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerMoveData
   m_EditorClassIdentifier: 
   m_moveSpeed: 350
-  m_jumpPowerPhase1: 80000
+  m_jumpPowerPhase1: 100000
   m_jumpPowerPhase2: 150000
   m_playerGravity: -50
   m_rayRange: 0.9

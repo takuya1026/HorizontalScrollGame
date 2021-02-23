@@ -14,7 +14,6 @@ public class PlayerMover
     private Transform       m_playerTransform;
     public  bool            m_isGround;
     public  bool            m_isJump;
-    private int             m_jumpCount = 0;
 
     private float angle = 90;
 
@@ -98,34 +97,24 @@ public class PlayerMover
     /// </summary>
     private void Jump()
     {
-        InputManager inputManger = InputManager.m_Instance;
-
         //地面についていた
         if (!m_isGround)
         {
             if (IsGround())
             {
                 m_isGround = true;
-                m_jumpCount = 0;
+            }
+            else
+            {
+                return;
             }
         }
 
         //ジャンプ
         if (m_isJump)
         {
-            if (m_jumpCount >= 2) return;
-
-            if (!m_isGround)
-            {
-                m_rigidbody.AddForce(Vector3.up * m_playerMoveData.m_GetJumpPowerPhase2);
-                m_jumpCount++;
-                return;
-            }
-
             m_rigidbody.AddForce(Vector3.up * m_playerMoveData.m_GetJumpPowerPhase1);
-
             m_isGround = false;
-            m_jumpCount++;
         }
     }
 
