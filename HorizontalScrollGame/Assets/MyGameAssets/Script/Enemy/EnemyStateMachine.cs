@@ -12,6 +12,11 @@ public class EnemyStateMachine
     }
 
     /// <summary>
+    /// 移動処理
+    /// </summary>
+    private EnemyMover m_mover;
+
+    /// <summary>
     /// 現在のステート
     /// </summary>
     protected State m_currentState = State.WANDERING;
@@ -24,8 +29,10 @@ public class EnemyStateMachine
     /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize(bool isFlying = false)
+    public void Initialize(EnemyMover mover,bool isFlying = false)
     {
+        m_mover = mover;
         m_isFlying = isFlying;
+        mover.Execute();
     }
 }

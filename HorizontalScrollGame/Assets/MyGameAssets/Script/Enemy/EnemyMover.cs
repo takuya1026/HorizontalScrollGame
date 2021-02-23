@@ -26,6 +26,16 @@ public abstract class EnemyMover : MonoBehaviour
 #endif
 
     /// <summary>
+    /// 開始
+    /// </summary>
+    abstract public void Execute();
+    
+    /// <summary>
+    /// 終了
+    /// </summary>
+    abstract public void End();
+
+    /// <summary>
     /// 接地しているか
     /// </summary>
     protected bool IsGround()
