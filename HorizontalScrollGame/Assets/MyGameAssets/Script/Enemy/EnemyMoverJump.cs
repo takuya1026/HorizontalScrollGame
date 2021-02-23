@@ -6,6 +6,15 @@ using DG.Tweening;
 
 public class EnemyMoverJump : EnemyMover
 {
+    /// <summary>
+    /// ジャンプパラメータ
+    /// </summary>
+    [SerializeField]
+    private EnemyMoveJumpParameter m_jumpParameter = null;
+
+    /// <summary>
+    /// ジャンプコルーチン
+    /// </summary>
     Coroutine m_jumpCoroutine;
 
     /// <summary>
@@ -27,7 +36,7 @@ public class EnemyMoverJump : EnemyMover
     /// </summary>
     public override void End()
     {
-        
+
     }
 
     /// <summary>
@@ -35,9 +44,8 @@ public class EnemyMoverJump : EnemyMover
     /// </summary>
     IEnumerator Jump(Action onEnd = null)
     {
-        float radAngle = 60 * Mathf.Deg2Rad;
-        Vector3 vec = new Vector3(Mathf.Cos(radAngle), Mathf.Sin(radAngle), 0);
-        m_target.AddForce(vec * 300);
+        Vector3 jumpAngleVector = Utility.Math.AngleToVector(m_jumpParameter.m_JumpAngle);
+        m_target.AddForce(jumpAngleVector * m_jumpParameter.m_JumpPower);
 
         // 地面から離れるまで
         while (IsGround()) { yield return null; }

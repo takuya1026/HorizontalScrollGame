@@ -19,12 +19,6 @@ public abstract class EnemyMover : MonoBehaviour
     /// </summary>
     private Ray m_ray = new Ray();
 
-#if UNITY_EDITOR
-    [Header("ギズモ表示")]
-    [SerializeField]
-    bool isDrawGizmos = false;
-#endif
-
     /// <summary>
     /// 開始
     /// </summary>
@@ -58,8 +52,6 @@ public abstract class EnemyMover : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        if (!isDrawGizmos) { return; }
-
         IsGround();
 
         // スフィアキャストを表示
