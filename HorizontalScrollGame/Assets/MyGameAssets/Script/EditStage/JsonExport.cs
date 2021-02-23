@@ -88,16 +88,16 @@ public class JsonExport : MonoBehaviour
         }
 
         GameObject obj = null;
-        BlockInfo blockInfo = null;
+        BlockBase blockBase = null;
         for (int i = 0, length = getChildCount(childObject); i < length; i++)
         {
             obj = getChildObject(childObject, i);
 
-            blockInfo = obj.GetComponent<BlockInfo>();
+            blockBase = obj.GetComponent<BlockBase>();
 
-            if (blockInfo != null)
+            if (blockBase != null)
             {
-                setForExportValue(blockInfo, totalIndex, childObject.name);
+                setForExportValue(blockBase, totalIndex, childObject.name);
 
                 totalIndex++;
             }
@@ -138,7 +138,7 @@ public class JsonExport : MonoBehaviour
     /// <param name="exportObject">書き出しオブジェクト</param>
     /// <param name="index">書き出し用変数の添え字</param>
     /// <param name="parentName">親オブジェクトの名前</param>
-    private void setForExportValue(BlockInfo exportInfo, int index, string parentName)
+    private void setForExportValue(BlockBase exportInfo, int index, string parentName)
     {
         m_obj.m_resultBlockInfo[index] = new StageInfo.ResultBlockInfo();
         m_obj.m_resultBlockInfo[index].m_parentName     = parentName;
@@ -197,8 +197,8 @@ public class JsonExport : MonoBehaviour
         {
             obj = getChildObject(childObject, i);
 
-            BlockInfo blockInfo = obj.GetComponent<BlockInfo>();
-            if (blockInfo != null)
+            BlockBase blockBase = obj.GetComponent<BlockBase>();
+            if (blockBase != null)
             {
                 return currentCount;
             }

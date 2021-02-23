@@ -93,7 +93,7 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
     private void createBlockObject(StageInfo stageInfo)
     {
         GameObject newObject = null;
-        BlockInfo blockInfo = null;
+        BlockBase blockBase = null;
         int imageIndex = 0;
 
         for (int i = 0, length = stageInfo.m_resultBlockInfo.Length; i < length; i++)
@@ -114,10 +114,10 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
             newObject.transform.rotation = stageInfo.m_resultBlockInfo[i].m_rotation;
             newObject.transform.localScale = stageInfo.m_resultBlockInfo[i].m_scale;
 
-            blockInfo = newObject.GetComponent<BlockInfo>();
-            blockInfo.m_EnumBlockType = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
-            blockInfo.m_ItemId = stageInfo.m_resultBlockInfo[i].m_itemId;
-            blockInfo.m_Quantity = stageInfo.m_resultBlockInfo[i].m_quantity;
+            blockBase = newObject.GetComponent<BlockBase>();
+            blockBase.m_EnumBlockType = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
+            blockBase.m_ItemId = stageInfo.m_resultBlockInfo[i].m_itemId;
+            blockBase.m_Quantity = stageInfo.m_resultBlockInfo[i].m_quantity;
 
             imageIndex = (int)stageInfo.m_resultBlockInfo[i].m_enumBlockType;
             newObject.GetComponent<Renderer>().sharedMaterial = (Material)Resources.Load("Texture/Stage/Materials/MapTexture" + imageIndex.ToString("D2"));

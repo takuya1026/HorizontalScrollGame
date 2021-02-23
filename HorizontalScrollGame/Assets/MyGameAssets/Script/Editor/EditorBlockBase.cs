@@ -1,25 +1,26 @@
 ﻿
 //============================================================
-// @file EditorBlockInfo
-// @brief ブロックの情報のエディタ拡張
+// @file EditorBlockBase
+// @brief ブロックベースのエディタ拡張
 // @autor ochi takuya
 //============================================================
+
 using UnityEditor;
 
 /// <summary>
-/// ブロックの情報のエディタ拡張
+/// ブロックベースのエディタ拡張
 /// </summary>
-[CustomEditor(typeof(BlockInfo))]
-public class EditorBlockInfo : Editor
+[CustomEditor(typeof(BlockBase), true)]
+public class EditorBlockBase : Editor
 {
-    private BlockInfo _target;
+    private BlockBase _target;
 
     /// <summary>
     /// 開始
     /// </summary>
     private void Awake()
     {
-        _target = target as BlockInfo;
+        _target = target as BlockBase;
     }
 
     /// <summary>
@@ -33,5 +34,6 @@ public class EditorBlockInfo : Editor
             _target.m_ItemId = EditorGUILayout.DelayedIntField("Item Id", _target.m_ItemId);
             _target.m_Quantity = EditorGUILayout.DelayedIntField("Quantity", _target.m_Quantity);
         }
+        //base.OnInspectorGUI();
     }
 }
