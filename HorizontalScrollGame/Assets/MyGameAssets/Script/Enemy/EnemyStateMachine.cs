@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStateMachine
 {
-    protected enum State
+    private enum State
     {
         WANDERING,  // 徘徊中
         FALLING,    // 落下中
@@ -14,25 +14,25 @@ public class EnemyStateMachine
     /// <summary>
     /// 移動処理
     /// </summary>
-    private EnemyMover m_mover;
+    private IEnemyMoverExecuter m_enemyMover;
 
     /// <summary>
     /// 現在のステート
     /// </summary>
-    protected State m_currentState = State.WANDERING;
+    private State m_currentState = State.WANDERING;
 
     /// <summary>
     /// 飛行中
     /// </summary>
-    protected bool m_isFlying = false;
+    private bool m_isFlying = false;
 
     /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize(EnemyMover mover,bool isFlying = false)
+    public void Initialize(IEnemyMoverExecuter enemyMover, bool isFlying = false)
     {
-        m_mover = mover;
+        m_enemyMover = enemyMover;
         m_isFlying = isFlying;
-        mover.Execute();
+        m_enemyMover.Execute();
     }
 }

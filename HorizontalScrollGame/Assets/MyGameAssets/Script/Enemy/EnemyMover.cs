@@ -1,65 +1,51 @@
 ﻿using UnityEngine;
 
-public abstract class EnemyMover : MonoBehaviour
+public abstract class EnemyMover<Parameter> : IEnemyMoverExecuter where Parameter : EnemyMoveParameter
 {
     /// <summary>
     /// 移動対象のRigidbody
     /// </summary>
-    [SerializeField]
-    protected Rigidbody m_target = null;
+    protected Rigidbody m_target;
 
     /// <summary>
-    /// 敵の種類ごとのパラメータ
+    /// 敵の衝突判定
     /// </summary>
-    [SerializeField]
-    protected EnemyTypeParameter m_typeParameter = null;
+    protected EnemyCollisionChecker m_collisionChecker;
 
     /// <summary>
-    /// レイ
+    /// 敵の移動パラメータ
     /// </summary>
-    private Ray m_ray = new Ray();
+    protected Parameter m_moveParameter;
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public virtual void Initialize(Rigidbody target, EnemyCollisionChecker collisionChecker, Parameter moveParameter)
+    {
+        m_target = target;
+        m_collisionChecker = collisionChecker;
+        m_moveParameter = moveParameter;
+
+        m_collisionChecker.Initialize(OnCollisionGround, OnCollisionWall);
+    }
 
     /// <summary>
     /// 開始
     /// </summary>
-    abstract public void Execute();
+    public abstract void Execute();
     
     /// <summary>
-    /// 終了
+    /// 停止
     /// </summary>
-    abstract public void End();
+    public abstract void Stop();
 
     /// <summary>
-    /// 接地しているか
+    /// 地面に接地した
     /// </summary>
-    protected bool IsGround()
-    {
-        m_ray.origin = m_target.transform.position;
-        m_ray.direction = Vector3.down;
-        var sphereCastParam = m_typeParameter.m_SphereCastParameter;
+    protected abstract void OnCollisionGround();
 
-        // 判定
-        if (Physics.SphereCast(m_ray, sphereCastParam.m_radius, sphereCastParam.m_distance))
-        {
-            return true;
-        }
-        return false;
-    }
-
-#if UNITY_EDITOR
     /// <summary>
-    /// ギズモ表示
+    /// 壁に接触した
     /// </summary>
-    private void OnDrawGizmos()
-    {
-        IsGround();
-
-        // スフィアキャストを表示
-        var sphereCastParam = m_typeParameter.m_SphereCastParameter;
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(m_ray.origin, m_ray.direction * sphereCastParam.m_distance);
-        Gizmos.DrawWireSphere(m_ray.GetPoint(sphereCastParam.m_distance), sphereCastParam.m_radius);
-        Gizmos.color = Color.white;
-    }
-#endif
+    protected abstract void OnCollisionWall();
 }

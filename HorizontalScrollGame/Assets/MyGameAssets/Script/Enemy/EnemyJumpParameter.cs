@@ -3,8 +3,8 @@
 /// <summary>
 /// 敵のジャンプまわりのパラメータ
 /// </summary>
-[CreateAssetMenu(menuName = "ScriptableObject/EnemyMoveJumpParameter")]
-public class EnemyMoveJumpParameter : ScriptableObject
+[CreateAssetMenu(menuName = "ScriptableObject/EnemyJumpParameter")]
+public class EnemyJumpParameter : EnemyMoveParameter
 {
     [SerializeField]
     private float m_jumpPower = 300;

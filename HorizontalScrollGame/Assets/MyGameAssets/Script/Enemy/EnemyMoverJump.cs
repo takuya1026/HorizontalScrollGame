@@ -1,58 +1,42 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
+﻿using UnityEngine;
 
-public class EnemyMoverJump : EnemyMover
+public class EnemyMoverJump : EnemyMover<EnemyJumpParameter>
 {
-    /// <summary>
-    /// ジャンプパラメータ
-    /// </summary>
-    [SerializeField]
-    private EnemyMoveJumpParameter m_jumpParameter = null;
-
-    /// <summary>
-    /// ジャンプコルーチン
-    /// </summary>
-    Coroutine m_jumpCoroutine;
-
     /// <summary>
     /// 開始
     /// </summary>
     public override void Execute()
     {
-        m_jumpCoroutine = StartCoroutine(Jump(() =>
-        {
-            StopCoroutine(m_jumpCoroutine);
-            m_jumpCoroutine = null;
-            Execute();
-            Debug.Log("");
-        }));
+        Jump();
     }
 
     /// <summary>
-    /// 終了
+    /// 停止
     /// </summary>
-    public override void End()
+    public override void Stop()
     {
-
     }
 
     /// <summary>
     /// ジャンプ
     /// </summary>
-    IEnumerator Jump(Action onEnd = null)
+    private void Jump()
     {
-        Vector3 jumpAngleVector = Utility.Math.AngleToVector(m_jumpParameter.m_JumpAngle);
-        m_target.AddForce(jumpAngleVector * m_jumpParameter.m_JumpPower);
+        Vector3 jumpAngleVector = Utility.Math.AngleToVector(m_moveParameter.m_JumpAngle);
+        m_target.AddForce(jumpAngleVector * m_moveParameter.m_JumpPower, ForceMode.Impulse);
+    }
 
-        // 地面から離れるまで
-        while (IsGround()) { yield return null; }
+    protected override void OnCollisionGround()
+    {
+        // 物理を一度停止して
+        m_target.Sleep();
+        Jump();
+    }
 
-        // 地面に着地するまで
-        while (!IsGround()) { yield return null; }
-
-        onEnd?.Invoke();
+    protected override void OnCollisionWall()
+    {
+        m_target.velocity *= -1;
+        m_target.Sleep();
+        Jump();
     }
 }

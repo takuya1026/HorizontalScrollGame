@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyTypeParameter
   m_EditorClassIdentifier: 
   m_sphereCastParameter:
-    m_distance: 0.25
+    m_distance: 0.255
     m_radius: 0.25
