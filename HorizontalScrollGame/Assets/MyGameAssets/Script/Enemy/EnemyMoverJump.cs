@@ -22,8 +22,9 @@ public class EnemyMoverJump : EnemyMover<EnemyJumpParameter>
     /// </summary>
     private void Jump()
     {
+        m_target.Sleep();
         Vector3 jumpAngleVector = Utility.Math.AngleToVector(m_moveParameter.m_JumpAngle);
-        m_target.AddForce(jumpAngleVector * m_moveParameter.m_JumpPower, ForceMode.Impulse);
+        m_target.AddForce((m_target.transform.forward + jumpAngleVector) * m_moveParameter.m_JumpPower, ForceMode.Impulse);
     }
 
     protected override void OnCollisionGround()
@@ -35,8 +36,8 @@ public class EnemyMoverJump : EnemyMover<EnemyJumpParameter>
 
     protected override void OnCollisionWall()
     {
-        m_target.velocity *= -1;
-        m_target.Sleep();
+        var trans = m_target.transform;
+        trans.forward *= -1;
         Jump();
     }
 }
