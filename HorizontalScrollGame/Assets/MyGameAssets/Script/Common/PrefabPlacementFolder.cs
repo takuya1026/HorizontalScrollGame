@@ -48,7 +48,14 @@ namespace Hexat.Editor
                     parentObject = GameObject.Find((gameObject.name + "_Element_" + m_parentId.ToString("D3")));
                     if (parentObject == null)
                     {
-                        return;
+                        GameObject rootObject = GameObject.Find((gameObject.name + "_Group"));
+                        if (rootObject == null)
+                        {
+                            return;
+                        }
+
+                        parentObject = new GameObject((gameObject.name + "_Element_" + m_parentId.ToString("D3")));
+                        parentObject.transform.parent = rootObject.transform;
                     }
                 }
                 else
@@ -56,7 +63,14 @@ namespace Hexat.Editor
                     parentObject = GameObject.Find(m_parentName);
                     if (parentObject == null)
                     {
-                        return;
+                        GameObject rootObject = GameObject.Find((gameObject.name + "_Group"));
+                        if (rootObject == null)
+                        {
+                            return;
+                        }
+
+                        parentObject = new GameObject(m_parentName);
+                        parentObject.transform.parent = rootObject.transform;
                     }
                 }
 

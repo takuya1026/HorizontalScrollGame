@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275be60f49d5c64daf77281635fe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isParentIgnore: 1
 --- !u!114 &1180583565535505656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98cfcb44a7b8294083dd86c7cc7e89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enumBlockType: 5
+  m_enumBlockType: 6
   m_itemId: 111
   m_quantity: 1
   tmpObj: {fileID: 7002414332544119532, guid: 72e6d2b49782e99499ef3f511047fa70, type: 3}

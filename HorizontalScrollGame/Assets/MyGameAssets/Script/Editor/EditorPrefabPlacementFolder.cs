@@ -35,6 +35,20 @@ public class EditorPrefabPlacementFolder : Editor
         {
             EditorGUILayout.LabelField("親のIDで検索 [ Self Name + _Element_ + Parent Id ]");
             _target.m_ParentId = EditorGUILayout.IntField("Parent ID", _target.m_ParentId);
+
+            EditorGUILayout.BeginHorizontal();
+            {
+                if (GUILayout.Button("Next"))
+                {
+                    _target.m_ParentId++;
+                }
+
+                if (GUILayout.Button("Prev"))
+                {
+                    _target.m_ParentId--;
+                }
+            }
+            EditorGUILayout.EndHorizontal();
         }
         else
         {
