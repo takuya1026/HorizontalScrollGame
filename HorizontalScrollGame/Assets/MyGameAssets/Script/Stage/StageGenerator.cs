@@ -44,15 +44,9 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
             return;
         }
 
-        Debug.Log(stageInfo.m_stageName);
         m_parentObject = new GameObject(stageInfo.m_stageName);
 
         createIntermediaryObject(stageInfo);
-
-        foreach (var key in m_gropObject.Keys)
-        {
-            Debug.Log(key);
-        }
 
         createBlockObject(stageInfo);
     }
@@ -137,6 +131,11 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
                     newObject.AddComponent<BlockDrop>();
                     blockBase = newObject.GetComponent<BlockDrop>();
                     break;
+
+                default:
+                    newObject.AddComponent<BlockBase>();
+                    blockBase = newObject.GetComponent<BlockBase>();
+                    break;
             }
 
             blockBase.m_EnumBlockType   = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
@@ -165,16 +164,14 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
     /// <returns>true：オブジェクト生成</returns>
     private bool createParentLinkObject(StageInfo stageInfo, int index, string searchName, GameObject parentObject)
     {
-        Debug.Log(stageInfo.m_resultBlockInfo[index].m_name);
         if (stageInfo.m_resultBlockInfo[index].m_name.IndexOf(searchName) >= 0)
         {
             GameObject newObject = new GameObject(stageInfo.m_resultBlockInfo[index].m_name);
             newObject.transform.parent = parentObject.transform;
             m_gropObjectIndex.Add(index);
-            Debug.Log(stageInfo.m_resultBlockInfo[index].m_name);
             m_gropObject.Add(stageInfo.m_resultBlockInfo[index].m_name, newObject);
             return true;
         }
-        return true;
+        return false;
     }
 }

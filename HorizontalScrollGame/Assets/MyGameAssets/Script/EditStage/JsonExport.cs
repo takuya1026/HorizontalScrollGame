@@ -185,6 +185,7 @@ public class JsonExport : MonoBehaviour
     private List<GameObject> getChildList(GameObject obj)
     {
         List<GameObject> allChildren = new List<GameObject>();
+        allChildren.Add(obj);
         getChildren(obj, ref allChildren);
         return allChildren;
     }
