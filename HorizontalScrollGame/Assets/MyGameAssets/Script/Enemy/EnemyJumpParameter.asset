@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ead57f782a788f4faa01d4785a502c9, type: 3}
   m_Name: EnemyJumpParameter
   m_EditorClassIdentifier: 
-  m_jumpPower: 10
-  m_jumpAngle: 60
+  m_jumpPower: 5
+  m_jumpAngle: 90
