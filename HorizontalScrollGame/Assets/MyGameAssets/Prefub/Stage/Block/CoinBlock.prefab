@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8415775060797543814}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -5.5, y: -6.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_enumBlockType: 5
   m_itemId: 222
   m_quantity: 10
+  m_texName: 
   tmpObj: {fileID: 4650450017794213312, guid: 9cdb239a9be7b3242ae9b9f84271bb8e, type: 3}
 --- !u!114 &6114549342582146757
 MonoBehaviour:
