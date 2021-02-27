@@ -16,8 +16,9 @@ public enum EnumBlockType
 {
     NONE,           // なし
     GRASS_SOIL,     // 草土
-    BREAK_BLOCK,    // ブロック(破壊)
     SOIL,           // 土
+    NORMAL_BLOCK,   // ブロック
+    BREAK_BLOCK,    // ブロック(破壊)
     COIN_BLOCK,     // ブロック(コイン)
     ITEM_BLOCK,     // ブロック(アイテム)
     GET_BLOCK,      // ブロック(取得済み)

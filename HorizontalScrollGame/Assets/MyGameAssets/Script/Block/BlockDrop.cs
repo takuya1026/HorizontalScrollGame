@@ -19,11 +19,6 @@ public class BlockDrop : BlockBase
     [SerializeField, Tooltip("仮：アイテムが出来たら消す")]
     private GameObject tmpObj;
 
-    private void Update()
-    {
-        Execute();
-    }
-
     /// <summary>
     /// 初期化
     /// </summary>
@@ -67,12 +62,14 @@ public class BlockDrop : BlockBase
     /// </summary>
     private void dorp()
     {
-        if (m_isDrop)
+        if (m_isEndAction && m_isDrop)
         {
             createItem();
 
             m_quantity--;
             m_isDrop = false;
+
+            disableEndAction();
         }
     }
 
@@ -99,7 +96,13 @@ public class BlockDrop : BlockBase
         GameObject newObject = Instantiate(tmpObj, transform.position, Quaternion.identity);
         if (m_enumBlockType == EnumBlockType.COIN_BLOCK)
         {
-            newObject.transform.DOMove(new Vector3(transform.position.x, (transform.position.y + 2.0f), transform.position.z), 0.5f);
+            DOTween.Sequence()
+                .Append(newObject.transform.DOLocalRotate(new Vector3(0, 360f, 0), 0.5f, RotateMode.FastBeyond360))
+                .Join(newObject.transform.DOMove(new Vector3(transform.position.x, (transform.position.y + 1.8f), transform.position.z), 0.5f)
+                    .OnComplete(() => {
+                        Destroy(newObject, 0.1f);
+                    }))
+                .Play();
         }
         else if (m_enumBlockType == EnumBlockType.ITEM_BLOCK)
         {
