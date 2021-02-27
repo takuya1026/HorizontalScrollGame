@@ -20,6 +20,8 @@ public class BlockBase : MonoBehaviour
     protected Material m_material = default;
     protected Texture m_texture = default;
     protected bool m_isAction = false;
+    protected bool m_isRunAction = false;
+    protected bool m_isEndAction = false;
 
     [SerializeField, Tooltip("ブロックタイプ")]
     protected EnumBlockType m_enumBlockType = default;
@@ -30,73 +32,45 @@ public class BlockBase : MonoBehaviour
     [SerializeField, Tooltip("個数")]
     protected int m_quantity = 1;
 
-    private readonly float ACTION_SPEED = 2.0f;
+    [SerializeField, Tooltip("テスクチャ")]
+    protected string m_texName = default;
 
-    public EnumBlockType m_EnumBlockType { get { return m_enumBlockType; } set { m_enumBlockType = value; } }
+    public Vector3          m_Postion   => gameObject.transform.position;
+    public Quaternion       m_Rotation  => gameObject.transform.rotation;
+    public Vector3          m_Scale     => gameObject.transform.localScale;
 
-    public Vector3 m_Postion {
-        get {
-            m_postion = gameObject.transform.position;
-            return m_postion;
-        }
-        set {
-            m_postion = value;
-        }
-    }
+    public EnumBlockType    m_EnumBlockType {   get { return m_enumBlockType; }   set { m_enumBlockType = value; }  }
+    public string           m_TexName       {   get { return m_texName; }         set { m_texName = value; }        }
 
-    public Quaternion m_Rotation
+    public int m_ItemId
     {
         get
         {
-            m_rotation = gameObject.transform.rotation;
-            return m_rotation;
-        }
-        set
-        {
-            m_rotation = value;
-        }
-    }
-
-    public Vector3 m_Scale
-    {
-        get
-        {
-            m_scale = gameObject.transform.localScale;
-            return m_scale;
-        }
-        set
-        {
-            m_scale = value;
-        }
-    }
-
-    public int m_ItemId {
-        get {
-
-            if (!IsItemAndCoinBlock())
+            if (! IsItemAndCoinBlock())
             {
                 m_itemId = 0;
             }
-
             return m_itemId;
         }
-        set {
+        set
+        {
             m_itemId = value;
         }
 
     }
 
-    public int m_Quantity {
-        get {
-
-            if (!IsItemAndCoinBlock())
+    public int m_Quantity
+    {
+        get
+        {
+            if (! IsItemAndCoinBlock())
             {
                 m_quantity = 0;
             }
-
             return m_quantity;
         }
-        set {
+        set
+        {
             m_quantity = value;
         }
     }
@@ -120,6 +94,7 @@ public class BlockBase : MonoBehaviour
     /// </summary>
     public virtual void Init()
     {
+        // 処理なし
     }
 
     /// <summary>
@@ -143,18 +118,33 @@ public class BlockBase : MonoBehaviour
     /// </summary>
     protected virtual void action()
     {
-        if (m_isAction)
+        if (m_isAction && !m_isRunAction && !m_isEndAction)
         {
-            transform.DOJump(transform.position, 0.4f, 1, 0.2f).SetEase(Ease.Linear);
-            m_isAction = false;
+            transform.DOJump(transform.position, 0.4f, 1, 0.2f)
+                .SetEase(Ease.Linear)
+                .OnComplete(() => {
+                    m_isAction = false;
+                    m_isRunAction = false;
+                    m_isEndAction = true;
+                });
+
+            m_isRunAction = true;
         }
+    }
+
+    /// <summary>
+    /// 終了アクションを無効にする
+    /// </summary>
+    protected virtual void disableEndAction()
+    {
+        m_isEndAction = false;
     }
 
     /// <summary>
     /// テスクチャ変更
     /// </summary>
     /// <param name="path">path from resource</param>
-    /// <param name="textureName">texture name (no identifier)</param>
+    /// <param name="textureName">texture name</param>
     protected virtual void changeTexture(string path = "", string textureName = "")
     {
         if (path == "")

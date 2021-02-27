@@ -1,7 +1,17 @@
-﻿using System.Collections;
+﻿
+//============================================================
+// @file JsonImport
+// @brief ファイルの読み込み
+// @autor ochi.takuya
+//============================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ファイルの読み込み
+/// </summary>
 public class JsonImport : MonoBehaviour
 {
     private StageInfo m_obj;
