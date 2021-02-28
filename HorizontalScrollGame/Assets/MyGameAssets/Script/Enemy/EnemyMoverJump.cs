@@ -27,14 +27,12 @@ public class EnemyMoverJump : EnemyMover<EnemyJumpParameter>
         m_target.AddForce((m_target.transform.forward + jumpAngleVector) * m_moveParameter.m_JumpPower, ForceMode.Impulse);
     }
 
-    protected override void OnCollisionGround()
+    public override void OnCollisionGround()
     {
-        // 物理を一度停止して
-        m_target.Sleep();
         Jump();
     }
 
-    protected override void OnCollisionWall()
+    public override void OnCollisionWall()
     {
         var trans = m_target.transform;
         trans.forward *= -1;

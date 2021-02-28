@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class EnemyMover<Parameter> : IEnemyMoverExecuter where Parameter : EnemyMoveParameter
+public abstract class EnemyMover<Parameter> : IEnemyMover where Parameter : EnemyMoveParameter
 {
     /// <summary>
     /// 移動対象のRigidbody
@@ -20,13 +20,10 @@ public abstract class EnemyMover<Parameter> : IEnemyMoverExecuter where Paramete
     /// <summary>
     /// 初期化
     /// </summary>
-    public virtual void Initialize(Rigidbody target, EnemyCollisionChecker collisionChecker, Parameter moveParameter)
+    public virtual void Initialize(Rigidbody target, Parameter moveParameter)
     {
         m_target = target;
-        m_collisionChecker = collisionChecker;
         m_moveParameter = moveParameter;
-
-        m_collisionChecker.Initialize(OnCollisionGround, OnCollisionWall);
     }
 
     /// <summary>
@@ -42,10 +39,10 @@ public abstract class EnemyMover<Parameter> : IEnemyMoverExecuter where Paramete
     /// <summary>
     /// 地面に接地した
     /// </summary>
-    protected abstract void OnCollisionGround();
+    public abstract void OnCollisionGround();
 
     /// <summary>
     /// 壁に接触した
     /// </summary>
-    protected abstract void OnCollisionWall();
+    public abstract void OnCollisionWall();
 }

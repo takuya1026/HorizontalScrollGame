@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateMachine
+public class EnemyStateMachine : IEnemyCollisionCallbacker
 {
     private enum State
     {
@@ -14,12 +14,12 @@ public class EnemyStateMachine
     /// <summary>
     /// 移動処理
     /// </summary>
-    private IEnemyMoverExecuter m_enemyMover;
+    private IEnemyMover m_enemyMover;
 
     /// <summary>
     /// 敵の飛行中の移動制御
     /// </summary>
-    private IEnemyMoverExecuter m_enemyFlyingMover;
+    private IEnemyMover m_enemyFlyingMover;
 
     /// <summary>
     /// 現在のステート
@@ -34,10 +34,18 @@ public class EnemyStateMachine
     /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize(IEnemyMoverExecuter enemyMover, IEnemyMoverExecuter enemyFlyingMover = null, bool isFlying = false)
+    public void Initialize(IEnemyMover enemyMover, IEnemyMover enemyFlyingMover = null, bool isFlying = false)
     {
         m_enemyMover = enemyMover;
         m_enemyFlyingMover = enemyFlyingMover;
         m_isFlying = isFlying;
+    }
+
+    public void OnCollisionGround()
+    {
+    }
+
+    public void OnCollisionWall()
+    {
     }
 }
