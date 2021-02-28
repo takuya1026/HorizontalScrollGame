@@ -41,10 +41,17 @@ public class EnemyStateMachine : IEnemyCollisionCallbacker
         m_isFlying = isFlying;
     }
 
+    /// <summary>
+    /// 地面に接地
+    /// </summary>
     public void OnCollisionGround()
     {
+
     }
 
+    /// <summary>
+    /// 壁に衝突
+    /// </summary>
     public void OnCollisionWall()
     {
     }
