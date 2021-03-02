@@ -39,10 +39,20 @@ public abstract class EnemyMover<Parameter> : IEnemyMover where Parameter : Enem
     /// <summary>
     /// 地面に接地した
     /// </summary>
-    public abstract void OnCollisionGround();
+    public virtual void OnCollisionGroundEnter() { }
+
+    /// <summary>
+    /// 地面から離れた
+    /// </summary>
+    public virtual void OnCollisionGroundExit() { }
 
     /// <summary>
     /// 壁に接触した
     /// </summary>
-    public abstract void OnCollisionWall();
+    public virtual void OnCollisionWallEnter() { }
+
+    /// <summary>
+    /// 壁から離れた
+    /// </summary>
+    public virtual void OnCollisionWallExit() { }
 }

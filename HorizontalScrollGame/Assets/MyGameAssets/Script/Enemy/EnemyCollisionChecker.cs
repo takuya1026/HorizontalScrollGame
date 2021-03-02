@@ -19,20 +19,36 @@ public class EnemyCollisionChecker : MonoBehaviour
     /// <summary>
     /// 地面に接地した
     /// </summary>
-    private Action m_onCollisionGround;
+    private Action m_onCollisionGroundEnter;
+
+    /// <summary>
+    /// 地面から離れた
+    /// </summary>
+    private Action m_onCollisionGroundExit;
 
     /// <summary>
     /// 壁に接触した
     /// </summary>
-    private Action m_onCollisionWall;
+    private Action m_onCollisionWallEnter;
+
+    /// <summary>
+    /// 壁から離れた
+    /// </summary>
+    private Action m_onCollisionWallExit;
 
     /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize(Action onCollisionGround = null, Action onCollisionWall = null)
+    public void Initialize(
+        Action onCollisionGroundEnter = null,
+        Action onCollisionGroundExit = null,
+        Action onCollisionWallEnter = null,
+        Action onCollisionWallExit = null)
     {
-        m_onCollisionGround = onCollisionGround;
-        m_onCollisionWall = onCollisionWall;
+        m_onCollisionGroundEnter = onCollisionGroundEnter;
+        m_onCollisionGroundExit = onCollisionGroundExit;
+        m_onCollisionWallEnter = onCollisionWallEnter;
+        m_onCollisionWallExit = onCollisionWallExit;
     }
 
     /// <summary>
@@ -60,12 +76,29 @@ public class EnemyCollisionChecker : MonoBehaviour
         // 地面
         if (IsGround())
         {
-            m_onCollisionGround?.Invoke();
+            m_onCollisionGroundEnter?.Invoke();
         }
         // 壁（天井は考慮しない）
         else
         {
-            m_onCollisionWall?.Invoke();
+            m_onCollisionWallEnter?.Invoke();
+        }
+    }
+
+    /// <summary>
+    /// 離れた
+    /// </summary>
+    private void OnCollisionExit(Collision collision)
+    {
+        // 地面
+        if (IsGround())
+        {
+            m_onCollisionGroundExit?.Invoke();
+        }
+        // 壁（天井は考慮しない）
+        else
+        {
+            m_onCollisionWallExit?.Invoke();
         }
     }
 
@@ -75,7 +108,10 @@ public class EnemyCollisionChecker : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        IsGround();
+        if (!Application.isPlaying)
+        {
+            IsGround();
+        }
 
         // スフィアキャストを表示
         var sphereCastParam = m_typeParameter.m_SphereCastParameter;

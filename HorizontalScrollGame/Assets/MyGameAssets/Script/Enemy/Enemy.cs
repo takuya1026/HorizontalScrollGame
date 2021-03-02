@@ -60,7 +60,12 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        m_collisionChecker.Initialize(OnCollisionGround, OnCollisionWall);
+        m_collisionChecker.Initialize(
+            OnCollisionGroundEnter,
+            OnCollisionGroundExit,
+            OnCollisionWallEnter,
+            OnCollisionWallExit);
+        
         m_enemyMover = InitializeMover(m_moveParameter);
         if (m_flyingMoveParameter != null)
         {
@@ -86,18 +91,45 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionGround()
+    /// <summary>
+    /// 地面に接地
+    /// </summary>
+    private void OnCollisionGroundEnter()
     {
-        m_stateMachine?.OnCollisionGround();
-        m_enemyMover?.OnCollisionGround();
-        m_enemyFlyingMover?.OnCollisionGround();
+        m_stateMachine?.OnCollisionGroundEnter();
+        m_enemyMover?.OnCollisionGroundEnter();
+        m_enemyFlyingMover?.OnCollisionGroundEnter();
         
     }
 
-    private void OnCollisionWall()
+    /// <summary>
+    /// 地面から離れた
+    /// </summary>
+    private void OnCollisionGroundExit()
     {
-        m_stateMachine?.OnCollisionWall();
-        m_enemyMover?.OnCollisionWall();
-        m_enemyFlyingMover?.OnCollisionWall();
+        m_stateMachine?.OnCollisionGroundExit();
+        m_enemyMover?.OnCollisionGroundExit();
+        m_enemyFlyingMover?.OnCollisionGroundExit();
+
+    }
+
+    /// <summary>
+    /// 壁に衝突
+    /// </summary>
+    private void OnCollisionWallEnter()
+    {
+        m_stateMachine?.OnCollisionWallEnter();
+        m_enemyMover?.OnCollisionWallEnter();
+        m_enemyFlyingMover?.OnCollisionWallEnter();
+    }
+
+    /// <summary>
+    /// 壁から離れた
+    /// </summary>
+    private void OnCollisionWallExit()
+    {
+        m_stateMachine?.OnCollisionWallExit();
+        m_enemyMover?.OnCollisionWallExit();
+        m_enemyFlyingMover?.OnCollisionWallExit();
     }
 }
