@@ -5,14 +5,12 @@
 // @autor ochi takuya
 //============================================================
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// ギミックベース
 /// </summary>
-public class GimmickBase
+public class GimmickBase : MonoBehaviour
 {
     // protected member
     protected string m_name;
@@ -47,15 +45,15 @@ public class GimmickBase
     /// <summary>
     /// 起動時処理
     /// </summary>
-    public virtual void Awake() { /* 処置なし */ }
+    public virtual void IndividualAwake() { /* 処置なし */ }
 
     /// <summary>
     /// 開始時処理
     /// </summary>
-    public virtual void Start() { /* 処置なし */ }
+    public virtual void IndividualStart() { /* 処置なし */ }
 
     /// <summary>
     /// 更新処理
     /// </summary>
-    public virtual void Update() { /* 処置なし */ }
+    public virtual void IndividualUpdate() { /* 処置なし */ }
 }
