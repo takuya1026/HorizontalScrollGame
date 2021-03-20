@@ -14,7 +14,7 @@ public class GimmickBase : MonoBehaviour
 {
     // protected member
     protected string m_name;
-    protected GimmickType m_gimmickType;
+    protected GimmickMoveType m_gimmickType;
     protected GameObject m_object;
 
     /// <summary>
@@ -25,7 +25,7 @@ public class GimmickBase : MonoBehaviour
     /// <summary>
     /// ギミックタイプ
     /// </summary>
-    public GimmickType m_GimmickType { get { return m_gimmickType; } protected set { m_gimmickType = value; } }
+    public GimmickMoveType m_GimmickType { get { return m_gimmickType; } protected set { m_gimmickType = value; } }
 
     /// <summary>
     /// オブジェクト
