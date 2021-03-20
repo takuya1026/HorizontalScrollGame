@@ -1,7 +1,7 @@
 ﻿
 //============================================================
 // @file EditJsonExport
-// @brief シーンの読み込みと書き出し
+// @brief シーンの書き出し
 // @autor ochi takuya
 //============================================================
 
@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Json形式に書き出し
+/// </summary>
 public class JsonExport : MonoBehaviour
 {
     private StageInfo m_obj;
@@ -40,9 +43,9 @@ public class JsonExport : MonoBehaviour
             childCategoryObject = getChildObject(m_parentObj, categoryIndex);
             if (childCategoryObject.name == "Stage")
             {
-                int totalChildCount = getTotalChildCount(childCategoryObject, 0);
-                m_obj.m_resultBlockInfo = new StageInfo.ResultBlockInfo[(totalChildCount - 1)];
-                setForExport(childCategoryObject, 0);
+                List<GameObject> objecs = getChildList(childCategoryObject);
+                m_obj.m_resultBlockInfo = new StageInfo.ResultBlockInfo[objecs.Count];
+                setForExport(objecs);
             }
         }
 
@@ -54,7 +57,7 @@ public class JsonExport : MonoBehaviour
     /// <summary>
     /// 出力ファイルのバックアップ
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">パス</param>
     private void fileBackUp(string path)
     {
         string filePath = (COMMON_PATH + path);
@@ -76,41 +79,31 @@ public class JsonExport : MonoBehaviour
     /// <param name="childObject">子オブジェクト</param>
     /// <param name="index">再帰用：現在の書き出し用変数の添え字</param>
     /// <returns>再帰用：現在の書き出し用変数の添え字</returns>
-    private int setForExport(GameObject childObject, int index = 0)
+    private void setForExport(List<GameObject> objects)
     {
-        int totalIndex = index;
-
-        if (totalIndex == 0)
+        BlockBase blockBase = null;
+        Renderer renderer = null;
+        string texName = "";
+        for (int i = 0, length = objects.Count; i < length; i++)
         {
-            setForExportValue(childObject, totalIndex, m_parentObj.name);
+            blockBase = objects[i].GetComponent<BlockBase>();
 
-            totalIndex++;
-        }
-
-        GameObject obj = null;
-        BlockInfo blockInfo = null;
-        for (int i = 0, length = getChildCount(childObject); i < length; i++)
-        {
-            obj = getChildObject(childObject, i);
-
-            blockInfo = obj.GetComponent<BlockInfo>();
-
-            if (blockInfo != null)
+            if (blockBase != null)
             {
-                setForExportValue(blockInfo, totalIndex, childObject.name);
+                renderer = objects[i].GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    texName = renderer.material.mainTexture.name;
+                    renderer = null;
+                }
 
-                totalIndex++;
+                setForExportValue(blockBase, i, objects[i].transform.parent.name, texName);
             }
             else
             {
-                setForExportValue(obj, totalIndex, childObject.name);
-
-                totalIndex++;
-                totalIndex = setForExport(obj, totalIndex);
+                setForExportValue(objects[i], i, objects[i].transform.parent.name);
             }
         }
-
-        return totalIndex;
     }
 
     /// <summary>
@@ -130,6 +123,7 @@ public class JsonExport : MonoBehaviour
         m_obj.m_resultBlockInfo[index].m_enumBlockType  = EnumBlockType.NONE;
         m_obj.m_resultBlockInfo[index].m_itemId         = 0;
         m_obj.m_resultBlockInfo[index].m_quantity       = 0;
+        m_obj.m_resultBlockInfo[index].m_texName        = "";
     }
 
     /// <summary>
@@ -138,7 +132,7 @@ public class JsonExport : MonoBehaviour
     /// <param name="exportObject">書き出しオブジェクト</param>
     /// <param name="index">書き出し用変数の添え字</param>
     /// <param name="parentName">親オブジェクトの名前</param>
-    private void setForExportValue(BlockInfo exportInfo, int index, string parentName)
+    private void setForExportValue(BlockBase exportInfo, int index, string parentName, string texName)
     {
         m_obj.m_resultBlockInfo[index] = new StageInfo.ResultBlockInfo();
         m_obj.m_resultBlockInfo[index].m_parentName     = parentName;
@@ -149,12 +143,14 @@ public class JsonExport : MonoBehaviour
         m_obj.m_resultBlockInfo[index].m_enumBlockType  = exportInfo.m_EnumBlockType;
         m_obj.m_resultBlockInfo[index].m_itemId         = exportInfo.m_ItemId;
         m_obj.m_resultBlockInfo[index].m_quantity       = exportInfo.m_Quantity;
+        m_obj.m_resultBlockInfo[index].m_texName        = texName;
+
     }
 
     /// <summary>
     /// 現在のファイル数
     /// </summary>
-    /// <returns></returns>
+    /// <returns>現在のファイル数</returns>
     private int getCurrentFileNumber()
     {
         int count = 0;
@@ -169,7 +165,7 @@ public class JsonExport : MonoBehaviour
     /// <summary>
     /// 次のファイル番号
     /// </summary>
-    /// <returns></returns>
+    /// <returns>次のファイル番号</returns>
     private int getNextFileNumber()
     {
         int count = 0;
@@ -182,34 +178,35 @@ public class JsonExport : MonoBehaviour
     }
 
     /// <summary>
-    /// 全ての子供の総数を取得する
+    /// 子のリスト
     /// </summary>
-    /// <param name="childObject">子オブジェクト</param>
-    /// <param name="count">再帰用：現在のオブジェクト数</param>
-    /// <returns>全ての子供の総数</returns>
-    private int getTotalChildCount(GameObject childObject, int count = 0)
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    private List<GameObject> getChildList(GameObject obj)
     {
-        int totalCount = count;
-        int currentCount = getChildCount(childObject);
+        List<GameObject> allChildren = new List<GameObject>();
+        allChildren.Add(obj);
+        getChildren(obj, ref allChildren);
+        return allChildren;
+    }
 
-        GameObject obj = null;
-        for (int i = 0; i < currentCount; i++)
+    /// <summary>
+    /// 子の取得
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="allChildren"></param>
+    public static void getChildren(GameObject obj, ref List<GameObject> allChildren)
+    {
+        Transform children = obj.GetComponentInChildren<Transform>();
+        if (children.childCount == 0)
         {
-            obj = getChildObject(childObject, i);
-
-            BlockInfo blockInfo = obj.GetComponent<BlockInfo>();
-            if (blockInfo != null)
-            {
-                return currentCount;
-            }
-            else
-            {
-                totalCount += getTotalChildCount(obj, currentCount);
-            }
+            return;
         }
-
-        totalCount++;
-        return totalCount;
+        foreach (Transform ob in children)
+        {
+            allChildren.Add(ob.gameObject);
+            getChildren(ob.gameObject, ref allChildren);
+        }
     }
 
     /// <summary>

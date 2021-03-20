@@ -54,9 +54,18 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     [SerializeField, Header("操作可能領域を設定")]
     private float m_inputArea = 0.3f;
 
+    private float m_notInputTime;
+
+    public float m_GetNotInputTime => m_notInputTime;
+
+    public float m_GetInputArea => m_inputArea;
+
     private Vector2 m_leftStick;
     private Vector2 m_rightStick;
     private Vector2 m_dirButton;
+    private Vector2 m_keyboardCross;
+
+    public Vector2 m_GetKeyboardCross => m_keyboardCross;
 
     /// <summary>
     /// 左スティックの入力値を返す
@@ -99,6 +108,9 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
         m_dirButton.y = Input.GetAxis(JoypadInputType.JOYPAD_DIR_HORIZONTAL.ToString());
     }
 
+    /// <summary>
+    /// Joypadの左、右スティク、左の十字キーの入力を取る
+    /// </summary>
     private void updateJoypad()
     {
         updateLeftStick();
@@ -107,7 +119,35 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     }
 
     /// <summary>
+    /// キーボードの左右のみの入力を取る
+    /// </summary>
+    private void updateKeyboardClass()
+    {
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            m_keyboardCross.x = Vector2.left.x;
+        }
+        else if(Input.GetKey(KeyCode.RightArrow))
+        {
+            m_keyboardCross.x = Vector2.right.x;
+        }
+        else
+        {
+            m_keyboardCross.x = Vector2.zero.x;
+        }
+
+        m_keyboardCross.y = Vector2.zero.y;
+    }
+
+    /// <summary>
     /// ボタンの入力状態を取る
+    /// 
+    /// 例：Aボタンを押した"瞬間"の情報を取る
+    /// if(GetButtonsPushType(JoypadInputType(JoypadInputType.JOYPAD_BUTTON_A) == PushType.PUSH)
+    /// {
+    ///     Debug.Log("押されています");
+    /// }
+    /// 
     /// </summary>
     /// <param name="buttonType"></param>
     /// <returns></returns>
@@ -131,9 +171,29 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
         return PushType.NONE;
     }
 
+    public PushType GetKeyboardPushType(KeyCode key)
+    {
+        if (Input.GetKeyDown(key))
+        {
+            return PushType.PUSH;
+        }
+        if (Input.GetKeyDown(key))
+        {
+            return PushType.KEEP_PUSH;
+        }
+        if (Input.GetKeyDown(key))
+        {
+            return PushType.RELEASE;
+        }
+
+        return PushType.NONE;
+    }
+
     private void Update()
     {
         updateJoypad();
+        updateKeyboardClass();
+        CountNotInputTime();
     }
 
     /// <summary>
@@ -179,5 +239,35 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
         }
 
         return PushDirection.NONE;
+    }
+
+    /// <summary>
+    /// 入力されたかを返す
+    /// </summary>
+    /// <param name="input"></param>入力値を返す
+    /// <returns></returns>
+    private bool IsCurrentInput(Vector2 input)
+    {
+        return (input.magnitude > 0.01f) ? true : false; 
+    }
+
+    /// <summary>
+    /// 入力されていない時間を取得
+    /// </summary>
+    private void CountNotInputTime()
+    {
+        bool isCount = IsCurrentInput(m_leftStick)  ||
+                       IsCurrentInput(m_rightStick) ||
+                       IsCurrentInput(m_dirButton)  || //Pad
+                       IsCurrentInput(m_keyboardCross); //Keyboard
+
+        if (isCount)
+        {
+            m_notInputTime = 0f;
+        }
+        else
+        {
+            m_notInputTime += Time.deltaTime;
+        }
     }
 }

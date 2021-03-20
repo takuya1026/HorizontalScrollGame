@@ -26,7 +26,7 @@ public class StageInfo
         public EnumBlockType m_enumBlockType;
         public int m_itemId;
         public int m_quantity;
-        public GameObject[] m_child;
+        public string m_texName;
     }
 
     public string m_stageName;

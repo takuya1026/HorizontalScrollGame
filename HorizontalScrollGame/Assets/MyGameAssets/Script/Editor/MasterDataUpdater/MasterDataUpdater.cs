@@ -61,9 +61,17 @@ public class MasterDataUpdater : EditorWindow
                     });
                 }
 
-                // スプレッドシートの内容をJson形式に変換してファイル出力
-                var response = await SheetToJsonFormat("1qHvhS3OnsFuQ7MzCetPTSrCDWHOaZ-oom1hqnGm334w");
-                File.WriteAllText($"../HorizontalScrollGame.Server/Master/{response.Item1}.json",response.Item2,Encoding.UTF8);
+                // 各マスターデータのIDを取得
+                string jsonText = File.ReadAllText("Assets/MyGameAssets/Data/MasterData/master_sheetIdList.json");
+                Dictionary<string,string> masterIdTable = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
+
+                foreach (var masterId in masterIdTable.Values)
+                {
+                    // スプレッドシートの内容をJson形式に変換してファイル出力
+                    var response = await SheetToJsonFormat(masterId);
+                    File.WriteAllText($"../HorizontalScrollGame.Server/Master/{response.Item1}.json", response.Item2, Encoding.UTF8);
+                    EnemyMaster[] masters = JsonConvert.DeserializeObject<EnemyMaster[]>(response.Item2);
+                }
 
                 // 完了したよ！
                 EditorUtility.DisplayDialog("更新完了", "更新が完了しました。", "OK");

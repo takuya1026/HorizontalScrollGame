@@ -69,7 +69,7 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
                 continue;
             }
 
-            if (!m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_parentName))
+            if (! m_gropObject.ContainsKey(stageInfo.m_resultBlockInfo[i].m_parentName))
             {
                 continue;
             }
@@ -93,7 +93,7 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
     private void createBlockObject(StageInfo stageInfo)
     {
         GameObject newObject = null;
-        BlockInfo blockInfo = null;
+        BlockBase blockBase = null;
         int imageIndex = 0;
 
         for (int i = 0, length = stageInfo.m_resultBlockInfo.Length; i < length; i++)
@@ -114,16 +114,44 @@ public class StageGenerator : SingletonMonoBehaviour<StageGenerator>
             newObject.transform.rotation = stageInfo.m_resultBlockInfo[i].m_rotation;
             newObject.transform.localScale = stageInfo.m_resultBlockInfo[i].m_scale;
 
-            blockInfo = newObject.GetComponent<BlockInfo>();
-            blockInfo.m_EnumBlockType = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
-            blockInfo.m_ItemId = stageInfo.m_resultBlockInfo[i].m_itemId;
-            blockInfo.m_Quantity = stageInfo.m_resultBlockInfo[i].m_quantity;
+            switch (stageInfo.m_resultBlockInfo[i].m_enumBlockType)
+            {
+                case EnumBlockType.NORMAL_BLOCK:
+                    newObject.AddComponent<BlockNormal>();
+                    blockBase = newObject.GetComponent<BlockNormal>();
+                    break;
 
-            imageIndex = (int)stageInfo.m_resultBlockInfo[i].m_enumBlockType;
-            newObject.GetComponent<Renderer>().sharedMaterial = (Material)Resources.Load("Texture/Stage/Materials/MapTexture" + imageIndex.ToString("D2"));
+                case EnumBlockType.BREAK_BLOCK:
+                    newObject.AddComponent<BlockBreak>();
+                    blockBase = newObject.GetComponent<BlockBreak>();
+                    break;
+
+                case EnumBlockType.COIN_BLOCK:
+                case EnumBlockType.ITEM_BLOCK:
+                    newObject.AddComponent<BlockDrop>();
+                    blockBase = newObject.GetComponent<BlockDrop>();
+                    break;
+
+                default:
+                    newObject.AddComponent<BlockBase>();
+                    blockBase = newObject.GetComponent<BlockBase>();
+                    break;
+            }
+
+            blockBase.m_EnumBlockType   = stageInfo.m_resultBlockInfo[i].m_enumBlockType;
+            blockBase.m_ItemId          = stageInfo.m_resultBlockInfo[i].m_itemId;
+            blockBase.m_Quantity        = stageInfo.m_resultBlockInfo[i].m_quantity;
+            blockBase.m_TexName         = stageInfo.m_resultBlockInfo[i].m_texName;
+
+            imageIndex = (int)stageInfo.m_resultBlockInfo[i].m_enumBlockType - 1;
+            newObject.GetComponent<Renderer>().sharedMaterial = (Material)Resources.Load("Texture/Stage/Materials/" + blockBase.m_TexName);
 
             newObject.transform.parent = m_gropObject[stageInfo.m_resultBlockInfo[i].m_parentName].transform;
+
+            BlockManager.m_Instance.AddObjects(newObject);
         }
+
+        BlockManager.m_Instance.Init();
     }
 
     /// <summary>
